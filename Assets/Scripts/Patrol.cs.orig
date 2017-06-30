@@ -70,7 +70,11 @@ public class Patrol : MonoBehaviour
 
     void Sneeze()
     {
-        ParticleSys.Play();
+<<<<<<< HEAD
         FindObjectOfType<AudioManager>().PlaySound(AudioManager.Sound.HeadExplosion);
+        ParticlesSystemGameObject.GetComponent<ParticleSystem>().Play();
+=======
+        ParticleSys.Play();
+>>>>>>> origin/master
     }
 }

@@ -8,10 +8,12 @@ public class PlayerController : MonoBehaviour {
     private CharacterController _characterController;
     private const float SPEED = 5;
     private const float ROTSPEED = 0.5f;
+    private GameObject _sneezeArea;
 
     void Start ()
     {
         _characterController = this.GetComponent<CharacterController>();
+        _sneezeArea = this.transform.GetChild(0).gameObject;
     }
 	
 	void Update ()
@@ -30,5 +32,19 @@ public class PlayerController : MonoBehaviour {
             Quaternion targetRotation = Quaternion.LookRotation(moveVector);
             transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, ROTSPEED);
         }
+
+        bool sneezeDown = Input.GetButtonDown("Sneeze");
+        if (sneezeDown)
+        {
+            _sneezeArea.SetActive(true);
+        }
+
+        bool sneezeUp = Input.GetButtonUp("Sneeze");
+        if (sneezeUp)
+        {
+            _sneezeArea.SetActive(false);
+        }
+
     }
+
 }

@@ -19,14 +19,14 @@ public class ActorRotation : MonoBehaviour
 	    Vector3 rotation = transform.rotation.eulerAngles;
 	    if (_IsIncreasing)
 	    {
-	        rotation.z += _RotationSpeed;
-	        if (rotation.z < 180 && rotation.z > Angle)
+	        rotation.y += _RotationSpeed;
+	        if (rotation.y < 180 && rotation.y > Angle)
 	            _IsIncreasing = false;
 	    }
 	    else
 	    {
-            rotation.z -= _RotationSpeed;
-            if (rotation.z > 180 && rotation.z < 360 - Angle)
+            rotation.y -= _RotationSpeed;
+            if (rotation.y > 180 && rotation.y < 360 - Angle)
                 _IsIncreasing = true;
         }
 	    transform.rotation = Quaternion.Euler(rotation);

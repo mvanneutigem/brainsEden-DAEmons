@@ -12,12 +12,12 @@ public class Patrol : MonoBehaviour
     private Quaternion _lookRotation;
     private Vector3 _direction;
     private bool _touched = false;
-    public GameObject ParticlesSystemGameObject;
+    public ParticleSystem ParticleSys;
 
     // Use this for initialization
     void Start()
     {
-        ParticlesSystemGameObject.GetComponent<ParticleSystem>().Stop();
+        ParticleSys.Stop();
         // _wayPoints.Add(Vector3.zero);
         //for(int i = 0; i < Waypoints.Length)
     }
@@ -70,6 +70,6 @@ public class Patrol : MonoBehaviour
 
     void Sneeze()
     {
-        ParticlesSystemGameObject.GetComponent<ParticleSystem>().Play();
+        ParticleSys.Play();
     }
 }

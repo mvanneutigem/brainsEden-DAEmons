@@ -222,6 +222,7 @@ public class Patrol : MonoBehaviour
         }
         
         GameManager.Camera.Shake();
+        GameManager.VibrationManager.vibrate();
         GameManager.AudioManager.PlaySound(AudioManager.Sound.HeadExplosion);
     }
 

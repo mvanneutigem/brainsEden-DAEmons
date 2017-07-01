@@ -32,5 +32,6 @@ public class LevelManager : MonoBehaviour
     public void LoadLevel(int levelIndex)
     {
         SceneManager.LoadScene(levelIndex + 1);
+        GameManager.Paused = false;
     }
 }

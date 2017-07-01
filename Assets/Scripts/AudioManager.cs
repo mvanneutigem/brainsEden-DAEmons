@@ -101,11 +101,6 @@ public class AudioManager : MonoBehaviour
         return dB;
     }
 
-    void Awake()
-    {
-        DontDestroyOnLoad(transform.gameObject);
-    }
-
     private void OnEnable()
     {
         SceneManager.sceneLoaded += OnSceneLoad;

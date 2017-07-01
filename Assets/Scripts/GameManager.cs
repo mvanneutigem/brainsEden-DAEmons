@@ -56,6 +56,7 @@ public class GameManager : MonoBehaviour
         if (Input.GetKeyUp(KeyCode.Escape))
         {
             Paused = !Paused;
+            Debug.Log(Paused);
         }
     }
 

@@ -35,7 +35,6 @@ public class Patrol : MonoBehaviour
     private float _cutCornerFactor = 0;
     public float MaxCutCornerFactor = 5;
     public float CornerIncrementSpeed = 0.1f;
-    private bool _hasSneezed = false;
     private Sneeze[] _sneezes;
     private float _timePaused = 0;
 
@@ -63,25 +62,19 @@ public class Patrol : MonoBehaviour
         //for(int i = 0; i < Waypoints.Length)
     }
 
-    void OnTriggerEnter(Collider other)
-    {
-        if (other.CompareTag("Player"))
-        {
-            _touched = true;
-            Debug.Log("Don't touch me I'm Scared");
-            Sneeze();
-        }
-    }
-
     void OnParticleCollision(GameObject other)
     {
-        _touched = true;
-        //Debug.Log("ChainSneeze activated");
+        Debug.Log("ChainSneeze activated");
         Sneeze();
+        _touched = true;
+        
+        GameManager.IsSneezing = true;
     }
 
     void Update()
     {
+        if(GameManager.IsSneezing) return;
+
         for (int i = 0; i < Waypoints.Length; i++)
         {
             if (!_touched)
@@ -166,8 +159,7 @@ public class Patrol : MonoBehaviour
 
     void Sneeze()
     {
-        if (_hasSneezed) return;
-        _hasSneezed = true;
+        if (_touched) return;
         
         foreach (var sneeze in _sneezes)
         {

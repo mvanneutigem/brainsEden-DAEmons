@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System.Collections.Generic;
 
 public class GameManager : MonoBehaviour
 {
@@ -6,6 +7,8 @@ public class GameManager : MonoBehaviour
     public static AudioManager AudioManager;
     public static PauseMenu PauseMenu;
     private static Canvas _pauseMenuCanvas;
+
+    public static bool IsSneezing;
 
     static private bool _paused;
     static public bool Paused
@@ -38,6 +41,9 @@ public class GameManager : MonoBehaviour
 
     public static GameScene CurrentGameScene;
 
+    public static List<Sneeze> _sneezes;
+    public static PlayerController _playerController;
+
 
     void Start()
     {
@@ -59,6 +65,8 @@ public class GameManager : MonoBehaviour
             Debug.LogError("Pause menu not found! (use prefab)");
         }
         _pauseMenuCanvas = PauseMenu.GetComponent<Canvas>();
+
+        LoadData();
     }
 
     private void Update()
@@ -68,7 +76,50 @@ public class GameManager : MonoBehaviour
             Paused = !Paused;
             Debug.Log(Paused);
         }
+
+        if (IsSneezing)
+        {
+            bool isSneezing = false;
+            bool doneSneezing = true;
+
+            foreach (var sneeze in _sneezes)
+            {
+                if (sneeze.IsSneezing())
+                {
+                    isSneezing = true;
+                    break;
+                }
+
+                if (!sneeze.HasSneezed() && doneSneezing)
+                {
+                    doneSneezing = false;
+                }
+            }
+
+            if (isSneezing)
+            {
+                print("Still sneezing");
+            }
+            else
+            {
+                if (doneSneezing)
+                {
+                    print("everybody sneezed");
+                }
+                else
+                {
+                    print("not everybody sneezed");
+                }
+            }
+        }
     }
+
+    public void LoadData()
+    {
+        _sneezes = new List<Sneeze>();
+        _sneezes.AddRange(FindObjectsOfType<Sneeze>());
+    }
+
 
     // Non-static function for menu buttons
     public void CallQuit()

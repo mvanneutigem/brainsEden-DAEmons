@@ -14,6 +14,16 @@ public class LevelManager : MonoBehaviour
         Application.Quit();
     }
 
+    public void LoadMainMenu()
+    {
+        LoadScene(0);
+    }
+
+    public void LoadLevelSelection()
+    {
+        LoadScene(1);
+    }
+
     public void LoadScene(int sceneIndex)
     {
         SceneManager.LoadScene(sceneIndex);

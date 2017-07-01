@@ -12,6 +12,8 @@ public class Patrol : MonoBehaviour
     private Quaternion _lookRotation;
     private Vector3 _direction;
     private bool _touched = false;
+
+    private bool _hasSneezed = false;
     private Sneeze _sneeze;
 
 
@@ -91,6 +93,9 @@ public class Patrol : MonoBehaviour
 
     void Sneeze()
     {
+        if (_hasSneezed) return;
+        _hasSneezed = true;
+        
         _sneeze.Play();
         GameManager.Camera.Shake();
         GameManager.AudioManager.PlaySound(AudioManager.Sound.HeadExplosion);

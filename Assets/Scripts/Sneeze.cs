@@ -4,32 +4,45 @@ using UnityEngine;
 
 public class Sneeze : MonoBehaviour
 {
-	public ParticleSystem Sys;
+	private ParticleSystem _sys;
 
-	public float stopOffset = 1;
+	private float _stopOffset = .25f;
+	public List<Color> Colors;
+	public static int _colorIndex = -1;
 
 	void Awake ()
 	{
-		Sys = GetComponent<ParticleSystem>();
+		_sys = GetComponent<ParticleSystem>();
+		if (_colorIndex == -1)
+		{
+			_colorIndex = Random.Range(0, Colors.Count / 2) * 2;
+			print(_colorIndex);
+		}
 	}
 	
 	void Start()
 	{
-		Sys.Stop();
+		_sys.Stop();
 	}
 
 	void Update () 
 	{
-		if (Sys.time + stopOffset >= Sys.main.duration)
+		if (_sys.time + _stopOffset >= _sys.main.duration)
 		{
-			Sys.Stop();
+			_sys.Pause();
 		}
 	}
 
 	public void Play()
 	{
-		Sys.Clear();
-		Sys.time = 0;
-		Sys.Play();
+		_sys.Clear();
+		_sys.time = 0;
+		var main = _sys.main;
+
+		main.startColor = new ParticleSystem.MinMaxGradient(Colors[_colorIndex], Colors[_colorIndex + 1]);
+		_colorIndex += 2;
+		_colorIndex %= Colors.Count;
+
+		_sys.Play();
 	}
 }

@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
@@ -9,6 +10,10 @@ public class GameManager : MonoBehaviour
     private static Canvas _pauseMenuCanvas;
 
     public static bool IsSneezing;
+    private bool _finishedLevel = false;
+    private float _score = 0;
+    private GameObject _endScreen;
+    private GameObject _fillImage;
 
     static private bool _paused;
     static public bool Paused
@@ -47,6 +52,7 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
+        _finishedLevel = false;
         Camera = FindObjectOfType<CameraController>();
         if (!Camera)
         {
@@ -66,6 +72,9 @@ public class GameManager : MonoBehaviour
         }
         _pauseMenuCanvas = PauseMenu.GetComponent<Canvas>();
 
+        _endScreen = GameObject.Find("EndScreen");
+        _endScreen.SetActive(false);
+
         LoadData();
     }
 
@@ -75,6 +84,23 @@ public class GameManager : MonoBehaviour
         {
             Paused = !Paused;
             Debug.Log(Paused);
+        }
+
+        if (_finishedLevel)
+        {
+            if (!_endScreen.activeSelf)
+            {
+                _endScreen.SetActive(true);
+                _fillImage = _endScreen.transform.GetChild(0).transform.GetChild(1).transform.GetChild(0).gameObject;
+            }
+            else if (_fillImage)
+            {
+                if (_fillImage.GetComponent<Image>().fillAmount < _score)
+                {
+                    _fillImage.GetComponent<Image>().fillAmount += 0.05f;
+                }
+
+            }
         }
 
         if (IsSneezing)
@@ -104,12 +130,15 @@ public class GameManager : MonoBehaviour
             {
                 if (doneSneezing)
                 {
+                    _score = CalculateColourPercentage();
+                    //Debug.Log("Percentage colored: " + );
                     print("everybody sneezed");
                 }
                 else
                 {
                     print("not everybody sneezed");
                 }
+                _finishedLevel = true;
             }
         }
     }
@@ -130,5 +159,49 @@ public class GameManager : MonoBehaviour
     public static void Quit()
     {
         Application.Quit();
+    }
+
+    float CalculateColourPercentage()
+    {
+
+        RenderTexture rt = new RenderTexture(Screen.width, Screen.height, 24, RenderTextureFormat.ARGB32);
+        rt.useMipMap = false;
+        rt.antiAliasing = 1;
+        RenderTexture.active = rt;
+
+        var cam = GameObject.Find("Main Camera").GetComponent<Camera>();
+        cam.targetTexture = rt;
+
+        Texture2D screenshot = new Texture2D(Screen.width, Screen.height, TextureFormat.ARGB32, false);
+
+        cam.Render();
+
+        screenshot.ReadPixels(new Rect(0, 0, Screen.width, Screen.height), 0, 0, false);
+        screenshot.Apply();
+
+        cam.targetTexture = null;
+        RenderTexture.active = null;
+        Destroy(rt);
+
+        float percentage = 0;
+
+        Color[] pixelArr = screenshot.GetPixels(0);
+        float colouredPixelCount = 0;
+        for (int i = 0; i < pixelArr.Length; ++i)
+        {
+            if ((pixelArr[i].r == pixelArr[i].g) && (pixelArr[i].r == pixelArr[i].b) && (pixelArr[i].b == pixelArr[i].g))
+            {
+                //greyscale pixel
+
+            }
+            else
+            {
+                //coloured pixel
+                ++colouredPixelCount;
+            }
+        }
+        percentage = (colouredPixelCount / pixelArr.Length);
+
+        return percentage;
     }
 }

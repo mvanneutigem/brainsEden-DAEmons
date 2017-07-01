@@ -1,5 +1,6 @@
 ﻿using System;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class Patrol : MonoBehaviour
 {
@@ -38,9 +39,12 @@ public class Patrol : MonoBehaviour
     private Sneeze _sneeze;
     private float _timePauzed = 0;
 
+    private NavMeshAgent _navMeshAgent;
+
     void Awake ()
     {
         _sneeze = GetComponentInChildren<Sneeze>();
+        _navMeshAgent = GetComponent<NavMeshAgent>();
     }
     void Start()
     {
@@ -93,27 +97,27 @@ public class Patrol : MonoBehaviour
             //if we are on the line to the next point, stop cutting corner
             if ((Waypoints[_currentWayPoint].Transform.position - transform.position).magnitude + (Waypoints[_previousWaypoint].Transform.position - transform.position).magnitude == (Waypoints[_currentWayPoint].Transform.position - Waypoints[_previousWaypoint].Transform.position).magnitude)
                 _isDoingSmoothCorner = false;
-            if (_isDoingSmoothCorner)
-            {
-                if (_cutCornerFactor < MaxCutCornerFactor)
-                {
-                    _cutCornerFactor += CornerIncrementSpeed;
-                }
-                Vector3 smoothDirection = (Waypoints[_currentWayPoint].Transform.position - Waypoints[_previousWaypoint].Transform.position);
-                smoothDirection.Normalize();
-                _target = (Waypoints[_previousWaypoint].Transform.position + (smoothDirection * _cutCornerFactor));
-                if ((_target - transform.position).magnitude < 0.1f)
-                {
-                    _target = Waypoints[_currentWayPoint].Transform.position;
-                }
-                _direction = (_target - transform.position).normalized;
-                Debug.DrawLine(transform.position, _target, Color.red);
-            }
-            else
-            {
+            //if (_isDoingSmoothCorner)
+            //{
+            //    if (_cutCornerFactor < MaxCutCornerFactor)
+            //    {
+            //        _cutCornerFactor += CornerIncrementSpeed;
+            //    }
+            //    Vector3 smoothDirection = (Waypoints[_currentWayPoint].Transform.position - Waypoints[_previousWaypoint].Transform.position);
+            //    smoothDirection.Normalize();
+            //    _target = (Waypoints[_previousWaypoint].Transform.position + (smoothDirection * _cutCornerFactor));
+            //    if ((_target - transform.position).magnitude < 0.1f)
+            //    {
+            //        _target = Waypoints[_currentWayPoint].Transform.position;
+            //    }
+            //    _direction = (_target - transform.position).normalized;
+            //    Debug.DrawLine(transform.position, _target, Color.red);
+            //}
+            //else
+            //{
                 _target = Waypoints[_currentWayPoint].Transform.position;
                 _direction = (_target - transform.position).normalized;
-            }
+            //}
 
             // Only turn if we aren't on top of the target point
             if (_direction.magnitude > 0.0f)
@@ -146,7 +150,10 @@ public class Patrol : MonoBehaviour
             //Vector3 lerpValue = Vector3.Lerp(TransSelf.position + TransSelf.forward, Waypoints[_currentWayPoint].Transform.position, Time.deltaTime * 2);
             //TransSelf.LookAt(lerpValue/*Waypoints[_currentWayPoint].Transform.position*/);
             Debug.DrawLine(transform.position, _target, Color.green);
-            TransSelf.position = Vector3.MoveTowards(TransSelf.position, _target, Speed * Time.deltaTime);
+
+            _navMeshAgent.destination = Waypoints[_currentWayPoint].Transform.position;
+            transform.rotation = Quaternion.LookRotation(_direction);
+            //TransSelf.position = Vector3.MoveTowards(TransSelf.position, _navMeshAgent.steeringTarget, Speed * Time.deltaTime);
         }
     }
 

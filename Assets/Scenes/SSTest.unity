@@ -509,9 +509,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   TransSelf: {fileID: 606176652}
   Waypoints:
-  - {fileID: 2113444213}
-  - {fileID: 1275250939}
-  - {fileID: 177104836}
+  - Transform: {fileID: 2113444213}
+    pauzeTime: 0
+  - Transform: {fileID: 1275250939}
+    pauzeTime: 2
+  - Transform: {fileID: 177104836}
+    pauzeTime: 0
   Speed: 5
   CutCornerDistance: 2
   _nextWayPoint: 0
@@ -528,7 +531,7 @@ GameObject:
   m_Layer: 0
   m_Name: Waypoint2
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 2974397684917235467, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -825,7 +828,7 @@ GameObject:
   m_Layer: 0
   m_Name: Waypoint1
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 2974397684917235467, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1

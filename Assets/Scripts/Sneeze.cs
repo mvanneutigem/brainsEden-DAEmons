@@ -12,6 +12,8 @@ public class Sneeze : MonoBehaviour
 	public List<Color> Colors;
 	public static int _colorIndex = -1;
 	
+	int _sneezeState = 0;
+	
 	void Awake ()
 	{
 		_sys = GetComponent<ParticleSystem>();
@@ -32,6 +34,7 @@ public class Sneeze : MonoBehaviour
 		if (_sys.time + StopOffset >= _sys.main.duration)
 		{
 			_sys.Pause();
+			_sneezeState = 2;
 		}
 	}
 
@@ -48,5 +51,9 @@ public class Sneeze : MonoBehaviour
 			_colorIndex %= Colors.Count;
 		}
 		_sys.Play();
+		_sneezeState = 1;
 	}
+
+	public bool IsSneezing() { return _sneezeState == 1; }
+	public bool HasSneezed() { return _sneezeState == 2; }
 }

@@ -107,7 +107,7 @@ public class Patrol : MonoBehaviour
             //*************
             //movement and looking
             //*************
-            if (_shouldMove)
+            if (_shouldMove && Waypoints.Length > 0)
             {
                 CheckIfWeShouldCutCorner();
                 CalculateTargetAndDirection();

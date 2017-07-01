@@ -105,6 +105,7 @@ public class Patrol : MonoBehaviour
                 if ((_target - transform.position).magnitude < 0.1f)
                 {
                     _target = Waypoints[_currentWayPoint].Transform.position;
+                    _isDoingSmoothCorner = false;
                 }
                 _direction = (_target - transform.position).normalized;
                 Debug.DrawLine(transform.position, _target, Color.red);
@@ -131,6 +132,7 @@ public class Patrol : MonoBehaviour
                     case Actions.Freeze:
                         break;
                     case Actions.Rotate:
+                        //getcomponent -> startrotate?
                         break;
                     default:
                         throw new ArgumentOutOfRangeException();

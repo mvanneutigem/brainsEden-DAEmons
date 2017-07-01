@@ -778,11 +778,6 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 114713381339948376, guid: 4510c2bf6e6a9aa48a0e275ba6860a2c,
-        type: 2}
-      propertyPath: Waypoints.Array.size
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 4839274621497834, guid: 4510c2bf6e6a9aa48a0e275ba6860a2c, type: 2}
       propertyPath: m_LocalPosition.x
       value: 20
@@ -820,21 +815,6 @@ Prefab:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 603a5405242041842b1d8e6b0caa8e28, type: 2}
-    - target: {fileID: 114713381339948376, guid: 4510c2bf6e6a9aa48a0e275ba6860a2c,
-        type: 2}
-      propertyPath: Waypoints.Array.data[0].Transform
-      value: 
-      objectReference: {fileID: 2000401965}
-    - target: {fileID: 114713381339948376, guid: 4510c2bf6e6a9aa48a0e275ba6860a2c,
-        type: 2}
-      propertyPath: Waypoints.Array.data[1].Transform
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 114713381339948376, guid: 4510c2bf6e6a9aa48a0e275ba6860a2c,
-        type: 2}
-      propertyPath: Waypoints.Array.data[2].Transform
-      value: 
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 4510c2bf6e6a9aa48a0e275ba6860a2c, type: 2}
   m_IsPrefabParent: 0
@@ -1086,11 +1066,6 @@ Transform:
   m_Father: {fileID: 135321661}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 90.00001, z: 0}
---- !u!4 &2000401965 stripped
-Transform:
-  m_PrefabParentObject: {fileID: 4166210381383144, guid: 55f2154f6a35fff4e982913888d7c579,
-    type: 2}
-  m_PrefabInternal: {fileID: 1694135746}
 --- !u!1 &2031141820
 GameObject:
   m_ObjectHideFlags: 0

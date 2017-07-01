@@ -14,7 +14,7 @@ public class GameManager : MonoBehaviour
 
     public static bool IsSneezing;
     private bool _finishedLevel = false;
-    private float _score = 0;
+    private float _score = -1;
     private GameObject _endScreen;
     private GameObject _fillImage;
 
@@ -112,7 +112,13 @@ public class GameManager : MonoBehaviour
             if (!_endScreen.activeSelf)
             {
                 _endScreen.SetActive(true);
-                _fillImage = _endScreen.transform.GetChild(0).transform.GetChild(1).transform.GetChild(0).gameObject;
+                if(_score > 0)
+                    _fillImage = _endScreen.transform.GetChild(0).transform.GetChild(1).transform.GetChild(0).gameObject;
+                else
+                {
+                    _endScreen.transform.GetChild(0).gameObject.SetActive(false);
+                    _endScreen.transform.GetChild(1).gameObject.SetActive(true);
+                }
             }
             else if (_fillImage)
             {

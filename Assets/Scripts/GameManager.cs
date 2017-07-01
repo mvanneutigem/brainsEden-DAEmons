@@ -2,9 +2,13 @@
 
 public class GameManager : MonoBehaviour
 {
+    public static CameraController Camera;
+    public static AudioManager AudioManager;
+    public static PauseMenu PauseMenu;
+    private static Canvas _pauseMenuCanvas;
 
-    private bool _paused;
-    public bool Paused
+    static private bool _paused;
+    static public bool Paused
     {
         get
         {
@@ -13,20 +17,56 @@ public class GameManager : MonoBehaviour
         set
         {
             _paused = value;
+            _pauseMenuCanvas.enabled = _paused;
+
             // TODO: Pause background music?
         }
     }
-    
-	void Start ()
+
+    // Non-static function for menu buttons
+    public void SetPaused(bool paused)
     {
-        if (!FindObjectOfType<AudioManager>())
+        Paused = paused;
+    }
+    
+	void Start()
+    {
+        Camera = FindObjectOfType<CameraController>();
+        if (!Camera)
         {
-            Debug.LogError("You need to add an audio manager to the scene! (prefab)");
+            Debug.LogError("No camera controller component in scene! (use prefab)");
+        }
+
+        AudioManager = FindObjectOfType<AudioManager>();
+        if (!AudioManager)
+        {
+            Debug.LogError("No audio manager in scene! (use prefab)");
+        }
+
+        PauseMenu = GameObject.FindGameObjectWithTag("PauseMenu").GetComponent<PauseMenu>();
+        if (!PauseMenu)
+        {
+            Debug.LogError("Pause menu not found! (use prefab)");
+        }
+        _pauseMenuCanvas = PauseMenu.GetComponent<Canvas>();
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyUp(KeyCode.Escape))
+        {
+            Paused = !Paused;
         }
     }
-	
-	void Update ()
+
+    // Non-static function for menu buttons
+    public void CallQuit()
     {
-		
-	}
+        Quit();
+    }
+
+    public static void Quit()
+    {
+        Application.Quit();
+    }
 }

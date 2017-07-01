@@ -7,6 +7,8 @@ public class Patrol : MonoBehaviour
     public Transform[] Waypoints;
     public float Speed = 5f;
     public float CutCornerDistance = 5f;
+    public int _currentWayPoint = 0;
+    public int _nextWayPoint = 0;
     private bool _isDoingSmoothCorner = false;
     private int _currentWayPoint = 0;
     private int _previousWaypoint = 0;
@@ -14,14 +16,21 @@ public class Patrol : MonoBehaviour
     private Vector3 _target;
     private Vector3 _direction;
     private bool _touched = false;
-    public ParticleSystem ParticleSys;
+
     private float _cutCornerFactor = 0;
     public float MaxCutCornerFactor = 5;
     public float CornerIncrementSpeed = 0.1f;
+    private bool _hasSneezed = false;
+    private Sneeze _sneeze;
+
+
+    void Awake ()
+    {
+        _sneeze = GetComponentInChildren<Sneeze>();
+    }
     void Start()
     {
         _previousWaypoint = Waypoints.Length - 1;
-        ParticleSys.Stop();
         // _wayPoints.Add(Vector3.zero);
         //for(int i = 0; i < Waypoints.Length)
     }
@@ -46,6 +55,8 @@ public class Patrol : MonoBehaviour
     void Update()
     {
         for (int i = 0; i < Waypoints.Length; i++)
+        //float factor = 250;
+        if (!_touched)
         {
             int next = i + 1;
             if (next >= Waypoints.Length)
@@ -126,7 +137,11 @@ public class Patrol : MonoBehaviour
 
     void Sneeze()
     {
-        ParticleSys.Play();
-        FindObjectOfType<AudioManager>().PlaySound(AudioManager.Sound.HeadExplosion);
+        if (_hasSneezed) return;
+        _hasSneezed = true;
+        
+        _sneeze.Play();
+        GameManager.Camera.Shake();
+        GameManager.AudioManager.PlaySound(AudioManager.Sound.HeadExplosion);
     }
 }

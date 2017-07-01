@@ -20,9 +20,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4795519656254026}
   - component: {fileID: 20196249692719842}
-  - component: {fileID: 92160349668208294}
-  - component: {fileID: 124670815741958610}
-  - component: {fileID: 81567924666670570}
   m_Layer: 0
   m_Name: cam walls
   m_TagString: MainCamera
@@ -59,9 +56,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4502500801823508}
   - component: {fileID: 20740153002626126}
-  - component: {fileID: 92504541964202788}
-  - component: {fileID: 124778094184507306}
-  - component: {fileID: 81465424925241278}
   m_Layer: 0
   m_Name: cam player
   m_TagString: MainCamera
@@ -78,9 +72,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4168134507235640}
   - component: {fileID: 20222524704890168}
-  - component: {fileID: 92566537170783290}
-  - component: {fileID: 124819757859857210}
-  - component: {fileID: 81719789800163172}
   m_Layer: 0
   m_Name: cam sneeze
   m_TagString: MainCamera
@@ -136,13 +127,13 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1052198811128556}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4790708581839588}
   m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 86.313, y: -32.016003, z: -31.963001}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!20 &20032139186388676
 Camera:
   m_ObjectHideFlags: 1
@@ -167,7 +158,7 @@ Camera:
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 4294966527
+    m_Bits: 4294965503
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -287,27 +278,6 @@ Camera:
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
   m_StereoMirrorMode: 0
---- !u!81 &81465424925241278
-AudioListener:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1354783906264370}
-  m_Enabled: 1
---- !u!81 &81567924666670570
-AudioListener:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1052198811128556}
-  m_Enabled: 1
---- !u!81 &81719789800163172
-AudioListener:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1504836519777206}
-  m_Enabled: 1
 --- !u!81 &81988434563414830
 AudioListener:
   m_ObjectHideFlags: 1
@@ -322,27 +292,6 @@ Behaviour:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1200179459823566}
   m_Enabled: 1
---- !u!92 &92160349668208294
-Behaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1052198811128556}
-  m_Enabled: 1
---- !u!92 &92504541964202788
-Behaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1354783906264370}
-  m_Enabled: 1
---- !u!92 &92566537170783290
-Behaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1504836519777206}
-  m_Enabled: 1
 --- !u!114 &114284951950035578
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -356,31 +305,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Intensity: 0.5
   Duration: 0.75
---- !u!124 &124670815741958610
-Behaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1052198811128556}
-  m_Enabled: 1
---- !u!124 &124778094184507306
-Behaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1354783906264370}
-  m_Enabled: 1
 --- !u!124 &124802065438046244
 Behaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1200179459823566}
-  m_Enabled: 1
---- !u!124 &124819757859857210
-Behaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1504836519777206}
   m_Enabled: 1

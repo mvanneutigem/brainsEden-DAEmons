@@ -41,9 +41,13 @@ public class GameManager : MonoBehaviour
             {
                 FindObjectOfType<EventSystem>().SetSelectedGameObject(null);
             }
-            // TODO: Pause background music?
+
+            OnPause(_paused);
         }
     }
+
+    public delegate void PauseAction(bool paused);
+    public static event PauseAction OnPause;
 
     // Non-static function for menu buttons
     public void SetPaused(bool paused)
@@ -104,7 +108,6 @@ public class GameManager : MonoBehaviour
         if (Input.GetKeyUp(KeyCode.Escape))
         {
             Paused = !Paused;
-            Debug.Log(Paused);
         }
 
         if (_finishedLevel)

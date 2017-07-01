@@ -210,10 +210,24 @@ public class Patrol : MonoBehaviour
 
     void checkIfWeShouldAvoidPlayer()
     {
+        Debug.DrawLine(transform.forward, transform.forward * 5, Color.blue);
         if ((Player.transform.position - transform.position).magnitude < _DetectionRadius)
         {
-            _shouldMove = false;
-            _navMeshAgent.isStopped = true;
+            if (Vector3.Angle(Player.transform.position, transform.forward) % ((360 * Math.PI)/180) < 30)
+            {
+                RaycastHit hit;
+                Vector3 transformPositionLow = transform.position;
+                transformPositionLow.y = 0.5f;
+                Vector3 direction = (Player.transform.position - transform.position).normalized;
+                if (Physics.Raycast(transformPositionLow, direction, out hit))
+                {
+                    if (hit.collider.gameObject.name == "Player")
+                    {
+                        _shouldMove = false;
+                        _navMeshAgent.isStopped = true;
+                    }
+                }
+            }
         }
     }
 

@@ -747,7 +747,7 @@ Prefab:
     - target: {fileID: 114713381339948376, guid: 4510c2bf6e6a9aa48a0e275ba6860a2c,
         type: 2}
       propertyPath: _DetectionRadius
-      value: 5
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 114713381339948376, guid: 4510c2bf6e6a9aa48a0e275ba6860a2c,
         type: 2}

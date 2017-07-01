@@ -147,6 +147,14 @@ Prefab:
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4790708581839588, guid: fbfe64cc047714147810d5f110a09c0b, type: 2}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4502500801823508, guid: fbfe64cc047714147810d5f110a09c0b, type: 2}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: fbfe64cc047714147810d5f110a09c0b, type: 2}
   m_IsPrefabParent: 0
@@ -4104,31 +4112,32 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 987a27a6998d7b547a0ba92af48237a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TransSelf: {fileID: 546408554}
   Waypoints:
   - Transform: {fileID: 312693334}
-    pauzeTime: 0
-    pauzeType: 0
+    pauseTime: 0
+    pauseType: 0
   - Transform: {fileID: 1752891427}
-    pauzeTime: 0
-    pauzeType: 0
+    pauseTime: 0
+    pauseType: 0
   - Transform: {fileID: 1199528452}
-    pauzeTime: 0
-    pauzeType: 0
+    pauseTime: 0
+    pauseType: 0
   - Transform: {fileID: 1513930021}
-    pauzeTime: 0
-    pauzeType: 0
+    pauseTime: 0
+    pauseType: 0
   - Transform: {fileID: 202298758}
-    pauzeTime: 0
-    pauzeType: 0
+    pauseTime: 0
+    pauseType: 0
   - Transform: {fileID: 421970360}
-    pauzeTime: 0
-    pauzeType: 0
+    pauseTime: 0
+    pauseType: 0
   Speed: 4
   CutCornerDistance: 5
   _nextWayPoint: 0
   MaxCutCornerFactor: 5
   CornerIncrementSpeed: 0.1
+  _DetectionRadius: 7.5
+  _LookAtPlayerRotationSpeedMultiplier: 2
 --- !u!23 &546408557
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -8550,31 +8559,32 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 987a27a6998d7b547a0ba92af48237a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TransSelf: {fileID: 1440492818}
   Waypoints:
   - Transform: {fileID: 733473903}
-    pauzeTime: 0
-    pauzeType: 0
+    pauseTime: 0
+    pauseType: 0
   - Transform: {fileID: 733473902}
-    pauzeTime: 0
-    pauzeType: 0
+    pauseTime: 0
+    pauseType: 0
   - Transform: {fileID: 733473901}
-    pauzeTime: 0
-    pauzeType: 0
+    pauseTime: 0
+    pauseType: 0
   - Transform: {fileID: 733473900}
-    pauzeTime: 0
-    pauzeType: 0
+    pauseTime: 0
+    pauseType: 0
   - Transform: {fileID: 733473908}
-    pauzeTime: 0
-    pauzeType: 0
+    pauseTime: 0
+    pauseType: 0
   - Transform: {fileID: 733473907}
-    pauzeTime: 0
-    pauzeType: 0
+    pauseTime: 0
+    pauseType: 0
   Speed: 4
   CutCornerDistance: 5
   _nextWayPoint: 0
   MaxCutCornerFactor: 5
   CornerIncrementSpeed: 0.1
+  _DetectionRadius: 7.5
+  _LookAtPlayerRotationSpeedMultiplier: 2
 --- !u!23 &1440492821
 MeshRenderer:
   m_ObjectHideFlags: 0

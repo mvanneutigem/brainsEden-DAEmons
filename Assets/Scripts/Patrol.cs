@@ -69,19 +69,28 @@ public class Patrol : MonoBehaviour
     void Update()
     {
         for (int i = 0; i < Waypoints.Length; i++)
-        //float factor = 250;
-        if (!_touched)
         {
-            int next = i + 1;
-            if (next >= Waypoints.Length)
+            if (!_touched)
             {
-                next = 0;
+                int next = i + 1;
+                if (next >= Waypoints.Length)
+                {
+                    next = 0;
+                }
+                Debug.DrawLine(Waypoints[i].Transform.position, Waypoints[next].Transform.position, Color.black);
             }
-            Debug.DrawLine(Waypoints[i].Transform.position, Waypoints[next].Transform.position,Color.black);
-            
         }
+
         if (!_touched)
         {
+            //*************
+            //avoidance
+            //*************
+            checkIfWeShouldAvoidPlayer();
+
+            //*************
+            //movement and looking
+            //*************
             CheckIfWeShouldCutCorner();
             CalculateTargetAndDirection();
             //this check shouldn't be necessary anymore but w/e, gamejam code
@@ -92,6 +101,10 @@ public class Patrol : MonoBehaviour
                 transform.rotation = Quaternion.Slerp(transform.rotation, _lookRotation, Time.deltaTime * Speed);
             }
 
+
+            //*************
+            //waypoint actions
+            //*************
             //waypoint reached, do waypoint action and select next waypoint
             if (TransSelf.position.Equals(Waypoints[_currentWayPoint].Transform.position))
             {
@@ -175,11 +188,14 @@ public class Patrol : MonoBehaviour
             Vector3 smoothDirection = (Waypoints[_currentWayPoint].Transform.position - Waypoints[_previousWaypoint].Transform.position);
             smoothDirection.Normalize();
             _target = (Waypoints[_previousWaypoint].Transform.position + (smoothDirection * _cutCornerFactor));
+
+            //if we're too close to the target to move closer, but not close enough to be ON the line, move on
             if ((_target - transform.position).magnitude < 0.1f)
             {
                 _target = Waypoints[_currentWayPoint].Transform.position;
                 _isDoingSmoothCorner = false;
             }
+
             _direction = (_target - transform.position).normalized;
             Debug.DrawLine(transform.position, _target, Color.red);
         }
@@ -188,5 +204,10 @@ public class Patrol : MonoBehaviour
             _target = Waypoints[_currentWayPoint].Transform.position;
             _direction = (_target - transform.position).normalized;
         }
+    }
+
+    void checkIfWeShouldAvoidPlayer()
+    {
+        
     }
 }

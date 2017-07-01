@@ -7,7 +7,6 @@ public class Patrol : MonoBehaviour
     public Transform[] Waypoints;
     public float Speed = 5f;
     public float CutCornerDistance = 5f;
-    public int _currentWayPoint = 0;
     public int _nextWayPoint = 0;
     private bool _isDoingSmoothCorner = false;
     private int _currentWayPoint = 0;

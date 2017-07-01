@@ -8,6 +8,7 @@ public class ActorRotation : MonoBehaviour
     public float Angle = 45;
     public float _RotationSpeed = 0.25f;
     private bool _IsIncreasing = true;
+    public bool ShouldRotate = true;
 	// Use this for initialization
 	void Start () {
 		
@@ -16,6 +17,9 @@ public class ActorRotation : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
 	{
+	    if (!ShouldRotate)
+	        return;
+
 	    Vector3 rotation = transform.rotation.eulerAngles;
 	    if (_IsIncreasing)
 	    {

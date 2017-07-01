@@ -107,7 +107,7 @@ public class Patrol : MonoBehaviour
             //*************
             //movement and looking
             //*************
-            if (_shouldMove)
+            if (_shouldMove && Waypoints.Length > 0)
             {
                 CheckIfWeShouldCutCorner();
                 CalculateTargetAndDirection();
@@ -136,7 +136,7 @@ public class Patrol : MonoBehaviour
                         case Actions.Freeze:
                             break;
                         case Actions.Rotate:
-                            //getcomponent -> startrotate?
+                            gameObject.GetComponent<ActorRotation>().ShouldRotate = true;
                             break;
                         default:
                             throw new ArgumentOutOfRangeException();
@@ -145,6 +145,16 @@ public class Patrol : MonoBehaviour
                     {
                         if (Waypoints.Length > 0)
                         {
+                            switch (Waypoints[_currentWayPoint].pauseType)
+                            {
+                                case Actions.Freeze:
+                                    break;
+                                case Actions.Rotate:
+                                    gameObject.GetComponent<ActorRotation>().ShouldRotate = false;
+                                    break;
+                                default:
+                                    throw new ArgumentOutOfRangeException();
+                            }
                             _timePaused = 0;
                             AddCurrentWaypoint();
                         }
@@ -216,10 +226,8 @@ public class Patrol : MonoBehaviour
             if (Vector3.Angle(Player.transform.position, transform.forward) % ((360 * Math.PI)/180) < 30)
             {
                 RaycastHit hit;
-                Vector3 transformPositionLow = transform.position;
-                transformPositionLow.y = 0.5f;
                 Vector3 direction = (Player.transform.position - transform.position).normalized;
-                if (Physics.Raycast(transformPositionLow, direction, out hit))
+                if (Physics.Raycast(transform.position, direction, out hit))
                 {
                     if (hit.collider.gameObject.name == "Player")
                     {

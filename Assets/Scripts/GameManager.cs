@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
 public class GameManager : MonoBehaviour
 {
@@ -8,6 +9,8 @@ public class GameManager : MonoBehaviour
     public static AudioManager AudioManager;
     public static PauseMenu PauseMenu;
     private static Canvas _pauseMenuCanvas;
+
+    private static GameObject _resumeButton;
 
     public static bool IsSneezing;
     private bool _finishedLevel = false;
@@ -25,8 +28,19 @@ public class GameManager : MonoBehaviour
         set
         {
             _paused = value;
-            _pauseMenuCanvas.enabled = _paused;
+            if (_pauseMenuCanvas)
+            {
+                _pauseMenuCanvas.enabled = _paused;
+            }
 
+            if (_paused)
+            {
+                FindObjectOfType<EventSystem>().SetSelectedGameObject(_resumeButton);
+            }
+            else
+            {
+                FindObjectOfType<EventSystem>().SetSelectedGameObject(null);
+            }
             // TODO: Pause background music?
         }
     }
@@ -50,7 +64,7 @@ public class GameManager : MonoBehaviour
     public static PlayerController _playerController;
 
 
-    void Start()
+    void Awake()
     {
         _finishedLevel = false;
         Camera = FindObjectOfType<CameraController>();
@@ -70,7 +84,14 @@ public class GameManager : MonoBehaviour
         {
             Debug.LogError("Pause menu not found! (use prefab)");
         }
+
         _pauseMenuCanvas = PauseMenu.GetComponent<Canvas>();
+        if (!_pauseMenuCanvas)
+        {
+            Debug.LogError("Pause menu doesn't have a canvas component!");
+        }
+
+        _resumeButton = GameObject.Find("ResumeButton").gameObject;
 
         _endScreen = GameObject.Find("EndScreen");
         _endScreen.SetActive(false);

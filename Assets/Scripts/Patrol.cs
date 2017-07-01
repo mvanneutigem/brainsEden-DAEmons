@@ -14,7 +14,6 @@ public class Patrol : MonoBehaviour
     private bool _touched = false;
     public ParticleSystem ParticleSys;
 
-    // Use this for initialization
     void Start()
     {
         ParticleSys.Stop();
@@ -39,10 +38,9 @@ public class Patrol : MonoBehaviour
         Sneeze();
     }
 
-    // Update is called once per frame
-        void Update()
-        {
-            float factor = 250;
+    void Update()
+    {
+        //float factor = 250;
         if (!_touched)
         {
             /*if ((Waypoints[_currentWayPoint].position - transform.position).magnitude < CutCornerDistance)
@@ -53,8 +51,13 @@ public class Patrol : MonoBehaviour
                 _direction = ((smoothDirection * factor) - transform.position).normalized;
             }*/
             _direction = (Waypoints[_currentWayPoint].position - transform.position).normalized;
-            _lookRotation = Quaternion.LookRotation(_direction);
-            transform.rotation = Quaternion.Slerp(transform.rotation, _lookRotation, Time.deltaTime * Speed);
+            // Only turn if we aren't on top of the target point
+            if (_direction.magnitude > 0.0f)
+            {
+                _lookRotation = Quaternion.LookRotation(_direction);
+                transform.rotation = Quaternion.Slerp(transform.rotation, _lookRotation, Time.deltaTime * Speed);
+            }
+
             //waypoint reached, select next waypoint
             if (TransSelf.position.Equals(Waypoints[_currentWayPoint].position))
             {

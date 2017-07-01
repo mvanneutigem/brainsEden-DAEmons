@@ -118,8 +118,6 @@ public class AudioManager : MonoBehaviour
                     _backgroundMusicSource.Play();
                     break;
                 case (int)GameManager.GameScene.MainMenu:
-                // Fallthrough
-                case (int)GameManager.GameScene.LevelSelection:
                     _backgroundMusicSource.clip = MenuBackgroundMusicClip;
                     _backgroundMusicSource.Play();
                     break;
@@ -135,8 +133,7 @@ public class AudioManager : MonoBehaviour
         SetSourceMixerGroupMixerGroup("Master/Music", _backgroundMusicSource);
         _backgroundMusicSource.loop = true;
 
-        if (GameManager.CurrentGameScene == GameManager.GameScene.MainMenu ||
-            GameManager.CurrentGameScene == GameManager.GameScene.LevelSelection)
+        if (GameManager.CurrentGameScene == GameManager.GameScene.MainMenu)
         {
             _backgroundMusicSource.clip = MenuBackgroundMusicClip;
         }
@@ -152,9 +149,6 @@ public class AudioManager : MonoBehaviour
         SetSourceMixerGroupMixerGroup("Master/SFX/Head Explosion", _headExplosionSource);
 
         _backgroundMusicSource.Play();
-
-        // TODO: DEBUG: Remove to start game unmuted
-        ToggleMuted();
     }
 
     private void Update()

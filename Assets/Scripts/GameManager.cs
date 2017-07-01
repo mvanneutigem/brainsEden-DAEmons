@@ -58,7 +58,6 @@ public class GameManager : MonoBehaviour
     public enum GameScene
     {
         MainMenu = 0,
-        LevelSelection,
         Game // TODO: Have one for each level?
     }
 

@@ -41,7 +41,7 @@ public class Patrol : MonoBehaviour
     private bool _shouldMove = true;
     //avoidance
     private GameObject Player;
-    public float _DetectionRadius = 2.5f;
+    public float _DetectionRadius = 5f;
     public float _LookAtPlayerRotationSpeedMultiplier = 2;
 
     void Awake ()
@@ -96,6 +96,7 @@ public class Patrol : MonoBehaviour
         if (!_touched)
         {
             _shouldMove = true;
+            _navMeshAgent.isStopped = false;
             //*************
             //avoidance
             //*************
@@ -148,6 +149,7 @@ public class Patrol : MonoBehaviour
                 Debug.DrawLine(transform.position, _target, Color.green);
 
                 _navMeshAgent.destination = _target;
+                
             }
         }
     }
@@ -206,6 +208,7 @@ public class Patrol : MonoBehaviour
         if ((Player.transform.position - transform.position).magnitude < _DetectionRadius)
         {
             _shouldMove = false;
+            _navMeshAgent.isStopped = true;
         }
     }
 

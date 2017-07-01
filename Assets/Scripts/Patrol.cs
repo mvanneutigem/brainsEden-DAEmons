@@ -87,6 +87,7 @@ public class Patrol : MonoBehaviour
     void Sneeze()
     {
         ParticleSys.Play();
-        FindObjectOfType<AudioManager>().PlaySound(AudioManager.Sound.HeadExplosion);
+        GameManager.Camera.Shake();
+        GameManager.AudioManager.PlaySound(AudioManager.Sound.HeadExplosion);
     }
 }

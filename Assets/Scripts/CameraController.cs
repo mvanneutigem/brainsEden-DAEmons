@@ -15,7 +15,6 @@ public class CameraController : MonoBehaviour
     {
         _camera = GetComponent<Camera>();
         _cameraStartingPosition = _camera.transform.position;
-
     }
 	
 	void Update ()
@@ -29,9 +28,11 @@ public class CameraController : MonoBehaviour
             durationScale = Mathf.Clamp01(durationScale);
 
             _shakeOffset += 
-                new Vector3(Random.Range(-Intensity, Intensity), 
-                Random.Range(-Intensity, Intensity), 
-                0.0f) * durationScale;
+                new Vector3(
+                    Random.Range(-Intensity, Intensity), 
+                    Random.Range(-Intensity, Intensity), 
+                    0.0f) * 
+                    durationScale;
 
             _camera.transform.position = _cameraStartingPosition + _shakeOffset;
         }

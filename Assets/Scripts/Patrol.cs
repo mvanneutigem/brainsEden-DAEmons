@@ -8,6 +8,13 @@ public class Patrol : MonoBehaviour
     {
         public Transform Transform;
         public float pauzeTime = 0;
+        public Actions pauzeType;
+    }
+
+    public enum Actions
+    {
+        Freeze = 0,
+        Rotate = 1
     }
 
     public Transform TransSelf;
@@ -119,6 +126,15 @@ public class Patrol : MonoBehaviour
             if (TransSelf.position.Equals(Waypoints[_currentWayPoint].Transform.position))
             {
                 _timePauzed += Time.deltaTime;
+                switch (Waypoints[_currentWayPoint].pauzeType)
+                {
+                    case Actions.Freeze:
+                        break;
+                    case Actions.Rotate:
+                        break;
+                    default:
+                        throw new ArgumentOutOfRangeException();
+                }
                 if (_timePauzed < Waypoints[_currentWayPoint].pauzeTime)
                     return;
                 if (Waypoints.Length > 0)

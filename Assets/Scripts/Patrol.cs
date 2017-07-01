@@ -17,7 +17,6 @@ public class Patrol : MonoBehaviour
         Rotate = 1
     }
 
-    public Transform TransSelf;
     //private List<Vector3> _wayPoints = new List<Vector3>();
     public Waypoint[] Waypoints;
     public float Speed = 5f;
@@ -37,6 +36,11 @@ public class Patrol : MonoBehaviour
     private bool _hasSneezed = false;
     private Sneeze[] _sneezes;
     private float _timePauzed = 0;
+    private bool _shouldMove = true;
+    //avoidance
+    private GameObject Player;
+    public float _DetectionRadius = 2.5f;
+    public float _LookAtPlayerRotationSpeedMultiplier = 2;
 
     void Awake ()
     {
@@ -45,6 +49,7 @@ public class Patrol : MonoBehaviour
     void Start()
     {
         _previousWaypoint = Waypoints.Length - 1;
+        Player = GameObject.Find("Player");
         // _wayPoints.Add(Vector3.zero);
         //for(int i = 0; i < Waypoints.Length)
     }
@@ -83,54 +88,58 @@ public class Patrol : MonoBehaviour
 
         if (!_touched)
         {
+            _shouldMove = true;
             //*************
             //avoidance
             //*************
             checkIfWeShouldAvoidPlayer();
+            if (!_shouldMove)
+                lookTowardsPlayer();
 
             //*************
             //movement and looking
             //*************
-            CheckIfWeShouldCutCorner();
-            CalculateTargetAndDirection();
-            //this check shouldn't be necessary anymore but w/e, gamejam code
-            // Only turn if we aren't on top of the target point
-            if (_direction.magnitude > 0.0f)
+            if (_shouldMove)
             {
-                _lookRotation = Quaternion.LookRotation(_direction);
-                transform.rotation = Quaternion.Slerp(transform.rotation, _lookRotation, Time.deltaTime * Speed);
-            }
-
-
-            //*************
-            //waypoint actions
-            //*************
-            //waypoint reached, do waypoint action and select next waypoint
-            if (TransSelf.position.Equals(Waypoints[_currentWayPoint].Transform.position))
-            {
-                _timePauzed += Time.deltaTime;
-                switch (Waypoints[_currentWayPoint].pauzeType)
+                CheckIfWeShouldCutCorner();
+                CalculateTargetAndDirection();
+                //this check shouldn't be necessary anymore but w/e, gamejam code
+                // Only turn if we aren't on top of the target point
+                if (_direction.magnitude > 0.0f)
                 {
-                    case Actions.Freeze:
-                        break;
-                    case Actions.Rotate:
-                        //getcomponent -> startrotate?
-                        break;
-                    default:
-                        throw new ArgumentOutOfRangeException();
+                    _lookRotation = Quaternion.LookRotation(_direction);
+                    transform.rotation = Quaternion.Slerp(transform.rotation, _lookRotation, Time.deltaTime * Speed);
                 }
-                if (_timePauzed < Waypoints[_currentWayPoint].pauzeTime)
-                    return;
-                if (Waypoints.Length > 0)
+
+                //*************
+                //waypoint actions
+                //*************
+                //waypoint reached, do waypoint action and select next waypoint
+                if (transform.position.Equals(Waypoints[_currentWayPoint].Transform.position))
                 {
-                    _timePauzed = 0;
-                    AddCurrentWaypoint();
+                    _timePauzed += Time.deltaTime;
+                    switch (Waypoints[_currentWayPoint].pauzeType)
+                    {
+                        case Actions.Freeze:
+                            break;
+                        case Actions.Rotate:
+                            //getcomponent -> startrotate?
+                            break;
+                        default:
+                            throw new ArgumentOutOfRangeException();
+                    }
+                    if (_timePauzed < Waypoints[_currentWayPoint].pauzeTime)
+                        return;
+                    if (Waypoints.Length > 0)
+                    {
+                        _timePauzed = 0;
+                        AddCurrentWaypoint();
+                    }
                 }
+                
+                Debug.DrawLine(transform.position, _target, Color.green);
+                transform.position = Vector3.MoveTowards(transform.position, _target, Speed * Time.deltaTime);
             }
-            //Vector3 lerpValue = Vector3.Lerp(TransSelf.position + TransSelf.forward, Waypoints[_currentWayPoint].Transform.position, Time.deltaTime * 2);
-            //TransSelf.LookAt(lerpValue/*Waypoints[_currentWayPoint].Transform.position*/);
-            Debug.DrawLine(transform.position, _target, Color.green);
-            TransSelf.position = Vector3.MoveTowards(TransSelf.position, _target, Speed * Time.deltaTime);
         }
     }
 
@@ -208,6 +217,23 @@ public class Patrol : MonoBehaviour
 
     void checkIfWeShouldAvoidPlayer()
     {
-        
+        if ((Player.transform.position - transform.position).magnitude < _DetectionRadius)
+        {
+            _shouldMove = false;
+        }
+    }
+
+    void lookTowardsPlayer()
+    {
+        var lookPos = Player.transform.position - transform.position;
+        lookPos.y = 0;
+        var rotation = Quaternion.LookRotation(lookPos);
+        transform.rotation = Quaternion.Slerp(transform.rotation, rotation, Time.deltaTime * _LookAtPlayerRotationSpeedMultiplier);
+
+        /*Vector3 lerpValue = Vector3.Lerp(transform.position + transform.forward, Player.transform.position, Time.deltaTime * _LookAtPlayerRotationSpeedMultiplier);
+        //lerpValue.x = 0;
+        //lerpValue.z = 0;
+        Debug.Log("looking at player");
+        //transform.LookAt(lerpValue);*/
     }
 }

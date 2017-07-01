@@ -278,6 +278,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f9f14e7674a05246bca503e0b13a7dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ShouldWiggle: 1
 --- !u!114 &114621229205284934
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -303,7 +304,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 987a27a6998d7b547a0ba92af48237a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Waypoints: []
+  Waypoints:
+  - Transform: {fileID: 0}
+    pauseTime: 0
+    pauseType: 0
+  - Transform: {fileID: 0}
+    pauseTime: 0
+    pauseType: 0
   Speed: 4
   CutCornerDistance: 2
   _nextWayPoint: 0

@@ -313,6 +313,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f9f14e7674a05246bca503e0b13a7dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ShouldWiggle: 1
 --- !u!136 &136426578604481646
 CapsuleCollider:
   m_ObjectHideFlags: 1

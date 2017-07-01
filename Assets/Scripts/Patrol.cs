@@ -6,7 +6,9 @@ public class Patrol : MonoBehaviour
     //private List<Vector3> _wayPoints = new List<Vector3>();
     public Transform[] Waypoints;
     public float Speed = 5f;
+    public float CutCornerDistance = 5f;
     public int _currentWayPoint = 0;
+    public int _nextWayPoint = 0;
     private Quaternion _lookRotation;
     private Vector3 _direction;
     private bool _touched = false;
@@ -39,9 +41,17 @@ public class Patrol : MonoBehaviour
 
     // Update is called once per frame
         void Update()
-    {
+        {
+            float factor = 250;
         if (!_touched)
         {
+            /*if ((Waypoints[_currentWayPoint].position - transform.position).magnitude < CutCornerDistance)
+            {
+                Vector3 smoothDirection = (Waypoints[_currentWayPoint].position - Waypoints[_currentWayPoint].position);
+                
+                smoothDirection.Normalize();
+                _direction = ((smoothDirection * factor) - transform.position).normalized;
+            }*/
             _direction = (Waypoints[_currentWayPoint].position - transform.position).normalized;
             _lookRotation = Quaternion.LookRotation(_direction);
             transform.rotation = Quaternion.Slerp(transform.rotation, _lookRotation, Time.deltaTime * Speed);
@@ -63,6 +73,11 @@ public class Patrol : MonoBehaviour
         if (_currentWayPoint >= Waypoints.Length)
         {
             _currentWayPoint = 0;
+        }
+        ++_nextWayPoint;
+        if (_nextWayPoint >= Waypoints.Length)
+        {
+            _nextWayPoint = 0;
         }
     }
 

@@ -223,7 +223,9 @@ public class Patrol : MonoBehaviour
         Debug.DrawLine(transform.forward, transform.forward * 5, Color.blue);
         if ((Player.transform.position - transform.position).magnitude < _DetectionRadius)
         {
-            if (Vector3.Angle(Player.transform.position, transform.forward) % ((360 * Math.PI)/180) < 30)
+            float test = Vector3.Angle((Player.transform.position - transform.position), transform.forward);
+            test = Mathf.Repeat(test, 360);
+            if (test < 60.0f)
             {
                 RaycastHit hit;
                 Vector3 direction = (Player.transform.position - transform.position).normalized;

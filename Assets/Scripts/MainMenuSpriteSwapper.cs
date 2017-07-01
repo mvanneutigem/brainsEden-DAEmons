@@ -9,7 +9,12 @@ public class MainMenuSpriteSwapper : MonoBehaviour
     public Image QuitSelectedImage;
     public GameObject LevelSelectionMenu;
 
-    private int _currentlySelectedLevelIndex = 0;
+    private int _currentlySelectedLevelIndex = 1;
+
+    public void LoadSelectedLevel()
+    {
+        FindObjectOfType<LevelManager>().LoadLevel(_currentlySelectedLevelIndex);
+    }
 
     public void OnLevelSelectHoverEnter()
     {

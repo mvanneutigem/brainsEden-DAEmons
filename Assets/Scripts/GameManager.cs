@@ -23,7 +23,10 @@ public class GameManager : MonoBehaviour
         set
         {
             _paused = value;
-            _pauseMenuCanvas.enabled = _paused;
+            if (_pauseMenuCanvas)
+            {
+                _pauseMenuCanvas.enabled = _paused;
+            }
 
             if (_paused)
             {

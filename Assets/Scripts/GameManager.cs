@@ -28,8 +28,18 @@ public class GameManager : MonoBehaviour
     {
         Paused = paused;
     }
-    
-	void Start()
+
+    public enum GameScene
+    {
+        MainMenu = 0,
+        LevelSelection,
+        Game // TODO: Have one for each level?
+    }
+
+    public static GameScene CurrentGameScene;
+
+
+    void Start()
     {
         Camera = FindObjectOfType<CameraController>();
         if (!Camera)

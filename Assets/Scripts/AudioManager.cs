@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Audio;
-using System;
 
 public class AudioManager : MonoBehaviour
 {
@@ -25,8 +24,6 @@ public class AudioManager : MonoBehaviour
 
     private bool _musicMuted = false;
     private float _lastMusicVolumeLinear;
-    //private bool _sfxMuted = false;
-    //private float _lastSFXVolumeLinear;
 
     public float MasterVolume
     {
@@ -53,7 +50,6 @@ public class AudioManager : MonoBehaviour
         }
     }
 
-    private float _musicVolume;
     public float GetMusicVolumeLinear()
     {
         float vol; Mixer.GetFloat("Music Volume", out vol);
@@ -103,12 +99,34 @@ public class AudioManager : MonoBehaviour
 
     private void OnEnable()
     {
-        SceneManager.sceneLoaded += OnSceneLoad;
+        SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
     private void OnDisable()
     {
-        SceneManager.sceneLoaded -= OnSceneLoad;
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+    public void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        if (_backgroundMusicSource)
+        {
+            switch (scene.buildIndex)
+            {
+                case (int)GameManager.GameScene.Game:
+                    _backgroundMusicSource.clip = GameBackgroundMusicClip;
+                    _backgroundMusicSource.Play();
+                    break;
+                case (int)GameManager.GameScene.MainMenu:
+                // Fallthrough
+                case (int)GameManager.GameScene.LevelSelection:
+                    _backgroundMusicSource.clip = MenuBackgroundMusicClip;
+                    _backgroundMusicSource.Play();
+                    break;
+                default:
+                    break;
+            }
+        }
     }
 
     private void Start()
@@ -116,15 +134,16 @@ public class AudioManager : MonoBehaviour
         CreateAndInitializeSource(ref _backgroundMusicSource, null);
         SetSourceMixerGroupMixerGroup("Master/Music", _backgroundMusicSource);
         _backgroundMusicSource.loop = true;
-        // TODO: Use once we have a menu
-        //if (GameManager.CurrentGameScene == GameManager.GameScene.MainMenu)
-        //{
-        //    _backgroundMusicSource.clip = MenuBackgroundMusicClip;
-        //}
-        //else if (GameManager.CurrentGameScene == GameManager.GameScene.Game)
-        //{
-            _backgroundMusicSource.clip = GameBackgroundMusicClip;
-        //}
+
+        if (GameManager.CurrentGameScene == GameManager.GameScene.MainMenu ||
+            GameManager.CurrentGameScene == GameManager.GameScene.LevelSelection)
+        {
+            _backgroundMusicSource.clip = MenuBackgroundMusicClip;
+        }
+        else
+        {
+          _backgroundMusicSource.clip = GameBackgroundMusicClip;
+        }
 
         CreateAndInitializeSource(ref _menuInteractionSource, MenuInteraction);
         SetSourceMixerGroupMixerGroup("Master/SFX/Menu Interaction", _menuInteractionSource);
@@ -185,11 +204,6 @@ public class AudioManager : MonoBehaviour
         AudioMixerGroup group = Mixer.FindMatchingGroups(subPath)[0];
         source.outputAudioMixerGroup = group;
         return group;
-    }
-
-    private void OnSceneLoad(Scene scene, LoadSceneMode mode)
-    {
-        
     }
 
     private void OnGamePause(bool paused)

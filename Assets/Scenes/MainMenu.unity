@@ -108,6 +108,46 @@ NavMeshSettings:
     tileSize: 256
     accuratePlacement: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &85451449
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 85451450}
+  - component: {fileID: 85451451}
+  m_Layer: 0
+  m_Name: LevelManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &85451450
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 85451449}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 212.03513, y: 68.31905, z: 1.5}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &85451451
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 85451449}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1ceba9d8a8416794fbeb9460cf625731, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &261944000
 GameObject:
   m_ObjectHideFlags: 0
@@ -196,7 +236,7 @@ RectTransform:
   - {fileID: 969277633}
   - {fileID: 743827881}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -442,7 +482,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2119524282}
+      - m_Target: {fileID: 85451451}
         m_MethodName: QuitGame
         m_Mode: 1
         m_Arguments:
@@ -564,8 +604,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2119524282}
-        m_MethodName: PlayGame
+      - m_Target: {fileID: 85451451}
+        m_MethodName: LoadLevelSelection
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -746,51 +786,3 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1001 &1917846903
-Prefab:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 4558371241069980, guid: a81f9f05319934b4c84b5743e1bd856d, type: 2}
-      propertyPath: m_LocalPosition.x
-      value: 257.55243
-      objectReference: {fileID: 0}
-    - target: {fileID: 4558371241069980, guid: a81f9f05319934b4c84b5743e1bd856d, type: 2}
-      propertyPath: m_LocalPosition.y
-      value: 69.52386
-      objectReference: {fileID: 0}
-    - target: {fileID: 4558371241069980, guid: a81f9f05319934b4c84b5743e1bd856d, type: 2}
-      propertyPath: m_LocalPosition.z
-      value: -19.895203
-      objectReference: {fileID: 0}
-    - target: {fileID: 4558371241069980, guid: a81f9f05319934b4c84b5743e1bd856d, type: 2}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4558371241069980, guid: a81f9f05319934b4c84b5743e1bd856d, type: 2}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4558371241069980, guid: a81f9f05319934b4c84b5743e1bd856d, type: 2}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4558371241069980, guid: a81f9f05319934b4c84b5743e1bd856d, type: 2}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4558371241069980, guid: a81f9f05319934b4c84b5743e1bd856d, type: 2}
-      propertyPath: m_RootOrder
-      value: 2
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_ParentPrefab: {fileID: 100100000, guid: a81f9f05319934b4c84b5743e1bd856d, type: 2}
-  m_IsPrefabParent: 0
---- !u!114 &2119524282 stripped
-MonoBehaviour:
-  m_PrefabParentObject: {fileID: 114010397579412444, guid: a81f9f05319934b4c84b5743e1bd856d,
-    type: 2}
-  m_PrefabInternal: {fileID: 1917846903}
-  m_Script: {fileID: 11500000, guid: 1ceba9d8a8416794fbeb9460cf625731, type: 3}

@@ -57,9 +57,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Mixer: {fileID: 24100000, guid: 1f184edfd0755d846b91f1303537fbb6, type: 2}
-  MenuBackgroundMusicClip: {fileID: 8300000, guid: 7a7ffa9ecf7b3504f950e78c417906eb,
+  MenuBackgroundMusicClip: {fileID: 8300000, guid: ac876f6c2d65c1942bf31ed4dfd44d41,
     type: 3}
-  GameBackgroundMusicClip: {fileID: 8300000, guid: 0c8487f275d82954cb24041d91f9a728,
+  GameBackgroundMusicClip: {fileID: 8300000, guid: a4e5c0a925e8d5348bcab223b6ea1273,
     type: 3}
   MenuInteraction: {fileID: 8300000, guid: 1ba946f6f7ad88a4ea26ca06c9601084, type: 3}
   HeadExplosion: {fileID: 8300000, guid: 50a52654b26a61c4e943a4e6b9b16e9f, type: 3}
@@ -80,7 +80,7 @@ MonoBehaviour:
   m_CancelButton: Cancel
   m_InputActionsPerSecond: 10
   m_RepeatDelay: 0.5
-  m_ForceModuleActive: 0
+  m_ForceModuleActive: 1
 --- !u!114 &114448820187371748
 MonoBehaviour:
   m_ObjectHideFlags: 1

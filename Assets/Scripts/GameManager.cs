@@ -58,7 +58,6 @@ public class GameManager : MonoBehaviour
     public enum GameScene
     {
         MainMenu = 0,
-        LevelSelection,
         Game // TODO: Have one for each level?
     }
 
@@ -106,7 +105,7 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyUp(KeyCode.Escape))
+        if (Input.GetButtonUp("Cancel"))
         {
             Paused = !Paused;
         }
@@ -126,7 +125,7 @@ public class GameManager : MonoBehaviour
             }
             else if (_fillImage)
             {
-                if (_fillImage.GetComponent<Image>().fillAmount < _score - 0.1f)
+                if (_fillImage.GetComponent<Image>().fillAmount < _score *2)
                 {
                     _fillImage.GetComponent<Image>().fillAmount += 0.05f;
                 }

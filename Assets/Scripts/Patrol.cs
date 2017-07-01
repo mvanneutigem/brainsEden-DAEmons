@@ -123,8 +123,12 @@ public class Patrol : MonoBehaviour
                 //waypoint actions
                 //*************
                 //waypoint reached, do waypoint action and select next waypoint
-                float minRadius = 1.0f;
-                if (Vector3.Distance(transform.position, Waypoints[_currentWayPoint].Transform.position) < minRadius)
+                float minRadius = 0.01f;
+                Vector2 thisPosNoY = transform.position, waypointNoY = Waypoints[_currentWayPoint].Transform.position;
+                thisPosNoY.y = 0;
+                waypointNoY.y = 0;
+
+                if (Vector3.Distance(thisPosNoY, waypointNoY) < minRadius)
                 {
                     _timePaused += Time.deltaTime;
                     switch (Waypoints[_currentWayPoint].pauseType)
@@ -132,17 +136,28 @@ public class Patrol : MonoBehaviour
                         case Actions.Freeze:
                             break;
                         case Actions.Rotate:
-                            //getcomponent -> startrotate?
+                            gameObject.GetComponent<ActorRotation>().ShouldRotate = true;
                             break;
                         default:
                             throw new ArgumentOutOfRangeException();
                     }
-                    if (_timePaused < Waypoints[_currentWayPoint].pauseTime)
-                        return;
-                    if (Waypoints.Length > 0)
+                    if (_timePaused >= Waypoints[_currentWayPoint].pauseTime)
                     {
-                        _timePaused = 0;
-                        AddCurrentWaypoint();
+                        if (Waypoints.Length > 0)
+                        {
+                            switch (Waypoints[_currentWayPoint].pauseType)
+                            {
+                                case Actions.Freeze:
+                                    break;
+                                case Actions.Rotate:
+                                    gameObject.GetComponent<ActorRotation>().ShouldRotate = false;
+                                    break;
+                                default:
+                                    throw new ArgumentOutOfRangeException();
+                            }
+                            _timePaused = 0;
+                            AddCurrentWaypoint();
+                        }
                     }
                 }
 
@@ -205,10 +220,24 @@ public class Patrol : MonoBehaviour
 
     void checkIfWeShouldAvoidPlayer()
     {
+        Debug.DrawLine(transform.forward, transform.forward * 5, Color.blue);
         if ((Player.transform.position - transform.position).magnitude < _DetectionRadius)
         {
-            _shouldMove = false;
-            _navMeshAgent.isStopped = true;
+            if (Vector3.Angle(Player.transform.position, transform.forward) % ((360 * Math.PI)/180) < 30)
+            {
+                RaycastHit hit;
+                Vector3 transformPositionLow = transform.position;
+                transformPositionLow.y = 0.5f;
+                Vector3 direction = (Player.transform.position - transform.position).normalized;
+                if (Physics.Raycast(transformPositionLow, direction, out hit))
+                {
+                    if (hit.collider.gameObject.name == "Player")
+                    {
+                        _shouldMove = false;
+                        _navMeshAgent.isStopped = true;
+                    }
+                }
+            }
         }
     }
 

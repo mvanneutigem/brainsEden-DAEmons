@@ -63,12 +63,12 @@ public class Patrol : MonoBehaviour
 
     private void OnEnable()
     {
-        GameManager.OnPause += OnPause;
+        //GameManager.OnPause += OnPause;
     }
 
     private void OnDisable()
     {
-        GameManager.OnPause -= OnPause;
+        //GameManager.OnPause -= OnPause;
     }
 
     void Start()

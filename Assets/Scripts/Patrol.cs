@@ -1,6 +1,4 @@
 ﻿using UnityEngine;
-using System.Collections;
-using System.Collections.Generic;
 
 public class Patrol : MonoBehaviour
 {
@@ -20,11 +18,6 @@ public class Patrol : MonoBehaviour
         ParticleSys.Stop();
         // _wayPoints.Add(Vector3.zero);
         //for(int i = 0; i < Waypoints.Length)
-
-        if (!FindObjectOfType<AudioManager>())
-        {
-            Debug.LogError("You need to add an audio manager to the scene! (prefab)");
-        }
     }
 
     void OnTriggerEnter(Collider other)

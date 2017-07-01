@@ -12,11 +12,16 @@ public class Patrol : MonoBehaviour
     private Quaternion _lookRotation;
     private Vector3 _direction;
     private bool _touched = false;
-    public ParticleSystem ParticleSys;
+    private Sneeze _sneeze;
+
+
+    void Awake ()
+    {
+        _sneeze = GetComponentInChildren<Sneeze>();
+    }
 
     void Start()
     {
-        ParticleSys.Stop();
         // _wayPoints.Add(Vector3.zero);
         //for(int i = 0; i < Waypoints.Length)
     }
@@ -86,7 +91,7 @@ public class Patrol : MonoBehaviour
 
     void Sneeze()
     {
-        ParticleSys.Play();
+        _sneeze.Play();
         FindObjectOfType<AudioManager>().PlaySound(AudioManager.Sound.HeadExplosion);
     }
 }

@@ -123,8 +123,12 @@ public class Patrol : MonoBehaviour
                 //waypoint actions
                 //*************
                 //waypoint reached, do waypoint action and select next waypoint
-                float minRadius = 1.0f;
-                if (Vector3.Distance(transform.position, Waypoints[_currentWayPoint].Transform.position) < minRadius)
+                float minRadius = 0.01f;
+                Vector2 thisPosNoY = transform.position, waypointNoY = Waypoints[_currentWayPoint].Transform.position;
+                thisPosNoY.y = 0;
+                waypointNoY.y = 0;
+
+                if (Vector3.Distance(thisPosNoY, waypointNoY) < minRadius)
                 {
                     _timePaused += Time.deltaTime;
                     switch (Waypoints[_currentWayPoint].pauseType)
@@ -137,12 +141,13 @@ public class Patrol : MonoBehaviour
                         default:
                             throw new ArgumentOutOfRangeException();
                     }
-                    if (_timePaused < Waypoints[_currentWayPoint].pauseTime)
-                        return;
-                    if (Waypoints.Length > 0)
+                    if (_timePaused >= Waypoints[_currentWayPoint].pauseTime)
                     {
-                        _timePaused = 0;
-                        AddCurrentWaypoint();
+                        if (Waypoints.Length > 0)
+                        {
+                            _timePaused = 0;
+                            AddCurrentWaypoint();
+                        }
                     }
                 }
 

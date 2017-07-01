@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ActorRotation : MonoBehaviour
 {
-    //Angle HAS to be smaller as 180
+    //Angle HAS to be smaller as 180 cause check is hardcoded for simpler math
     public float Angle = 45;
     public float _RotationSpeed = 0.25f;
     private bool _IsIncreasing = true;

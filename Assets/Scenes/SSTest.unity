@@ -511,10 +511,13 @@ MonoBehaviour:
   Waypoints:
   - Transform: {fileID: 2113444213}
     pauzeTime: 0
+    pauzeType: 0
   - Transform: {fileID: 1275250939}
     pauzeTime: 2
+    pauzeType: 0
   - Transform: {fileID: 177104836}
     pauzeTime: 0
+    pauzeType: 0
   Speed: 5
   CutCornerDistance: 2
   _nextWayPoint: 0
@@ -542,7 +545,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1275250938}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 2, z: 16.36}
+  m_LocalPosition: {x: -1.2, y: 2, z: 16.36}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}

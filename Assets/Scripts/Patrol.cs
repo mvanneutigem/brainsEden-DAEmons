@@ -1,6 +1,5 @@
 ﻿using System;
 using UnityEngine;
-using UnityEngine.AI;
 
 public class Patrol : MonoBehaviour
 {
@@ -36,15 +35,12 @@ public class Patrol : MonoBehaviour
     public float MaxCutCornerFactor = 5;
     public float CornerIncrementSpeed = 0.1f;
     private bool _hasSneezed = false;
-    private Sneeze _sneeze;
+    private Sneeze[] _sneezes;
     private float _timePauzed = 0;
-
-    private NavMeshAgent _navMeshAgent;
 
     void Awake ()
     {
-        _sneeze = GetComponentInChildren<Sneeze>();
-        _navMeshAgent = GetComponent<NavMeshAgent>();
+        _sneezes = GetComponentsInChildren<Sneeze>();
     }
     void Start()
     {
@@ -73,52 +69,31 @@ public class Patrol : MonoBehaviour
     void Update()
     {
         for (int i = 0; i < Waypoints.Length; i++)
-        //float factor = 250;
-        if (!_touched)
         {
-            int next = i + 1;
-            if (next >= Waypoints.Length)
+            if (!_touched)
             {
-                next = 0;
+                int next = i + 1;
+                if (next >= Waypoints.Length)
+                {
+                    next = 0;
+                }
+                Debug.DrawLine(Waypoints[i].Transform.position, Waypoints[next].Transform.position, Color.black);
             }
-            Debug.DrawLine(Waypoints[i].Transform.position, Waypoints[next].Transform.position,Color.black);
-            
         }
+
         if (!_touched)
         {
-            //if we are within cutcorner distance, start cutting corner
-            if (Waypoints[_currentWayPoint].pauzeTime == 0 && ((Waypoints[_currentWayPoint].Transform.position - transform.position).magnitude < CutCornerDistance))
-            {
-                _isDoingSmoothCorner = true;
-                _cutCornerFactor = 0;
-                if (Waypoints.Length > 0)
-                    AddCurrentWaypoint();
-            }
-            //if we are on the line to the next point, stop cutting corner
-            if ((Waypoints[_currentWayPoint].Transform.position - transform.position).magnitude + (Waypoints[_previousWaypoint].Transform.position - transform.position).magnitude == (Waypoints[_currentWayPoint].Transform.position - Waypoints[_previousWaypoint].Transform.position).magnitude)
-                _isDoingSmoothCorner = false;
-            //if (_isDoingSmoothCorner)
-            //{
-            //    if (_cutCornerFactor < MaxCutCornerFactor)
-            //    {
-            //        _cutCornerFactor += CornerIncrementSpeed;
-            //    }
-            //    Vector3 smoothDirection = (Waypoints[_currentWayPoint].Transform.position - Waypoints[_previousWaypoint].Transform.position);
-            //    smoothDirection.Normalize();
-            //    _target = (Waypoints[_previousWaypoint].Transform.position + (smoothDirection * _cutCornerFactor));
-            //    if ((_target - transform.position).magnitude < 0.1f)
-            //    {
-            //        _target = Waypoints[_currentWayPoint].Transform.position;
-            //    }
-            //    _direction = (_target - transform.position).normalized;
-            //    Debug.DrawLine(transform.position, _target, Color.red);
-            //}
-            //else
-            //{
-                _target = Waypoints[_currentWayPoint].Transform.position;
-                _direction = (_target - transform.position).normalized;
-            //}
+            //*************
+            //avoidance
+            //*************
+            checkIfWeShouldAvoidPlayer();
 
+            //*************
+            //movement and looking
+            //*************
+            CheckIfWeShouldCutCorner();
+            CalculateTargetAndDirection();
+            //this check shouldn't be necessary anymore but w/e, gamejam code
             // Only turn if we aren't on top of the target point
             if (_direction.magnitude > 0.0f)
             {
@@ -126,7 +101,11 @@ public class Patrol : MonoBehaviour
                 transform.rotation = Quaternion.Slerp(transform.rotation, _lookRotation, Time.deltaTime * Speed);
             }
 
-            //waypoint reached, select next waypoint
+
+            //*************
+            //waypoint actions
+            //*************
+            //waypoint reached, do waypoint action and select next waypoint
             if (TransSelf.position.Equals(Waypoints[_currentWayPoint].Transform.position))
             {
                 _timePauzed += Time.deltaTime;
@@ -135,6 +114,7 @@ public class Patrol : MonoBehaviour
                     case Actions.Freeze:
                         break;
                     case Actions.Rotate:
+                        //getcomponent -> startrotate?
                         break;
                     default:
                         throw new ArgumentOutOfRangeException();
@@ -150,10 +130,7 @@ public class Patrol : MonoBehaviour
             //Vector3 lerpValue = Vector3.Lerp(TransSelf.position + TransSelf.forward, Waypoints[_currentWayPoint].Transform.position, Time.deltaTime * 2);
             //TransSelf.LookAt(lerpValue/*Waypoints[_currentWayPoint].Transform.position*/);
             Debug.DrawLine(transform.position, _target, Color.green);
-
-            _navMeshAgent.destination = Waypoints[_currentWayPoint].Transform.position;
-            transform.rotation = Quaternion.LookRotation(_direction);
-            //TransSelf.position = Vector3.MoveTowards(TransSelf.position, _navMeshAgent.steeringTarget, Speed * Time.deltaTime);
+            TransSelf.position = Vector3.MoveTowards(TransSelf.position, _target, Speed * Time.deltaTime);
         }
     }
 
@@ -176,8 +153,61 @@ public class Patrol : MonoBehaviour
         if (_hasSneezed) return;
         _hasSneezed = true;
         
-        _sneeze.Play();
+        foreach (var sneeze in _sneezes)
+        {
+            sneeze.Play();
+        }
+        
         GameManager.Camera.Shake();
         GameManager.AudioManager.PlaySound(AudioManager.Sound.HeadExplosion);
+    }
+
+    void CheckIfWeShouldCutCorner()
+    {
+        //if we are within cutcorner distance, start cutting corner
+        if (Waypoints[_currentWayPoint].pauzeTime == 0 && ((Waypoints[_currentWayPoint].Transform.position - transform.position).magnitude < CutCornerDistance))
+        {
+            _isDoingSmoothCorner = true;
+            _cutCornerFactor = 0;
+            if (Waypoints.Length > 0)
+                AddCurrentWaypoint();
+        }
+        //if we are on the line to the next point, stop cutting corner
+        if ((Waypoints[_currentWayPoint].Transform.position - transform.position).magnitude + (Waypoints[_previousWaypoint].Transform.position - transform.position).magnitude == (Waypoints[_currentWayPoint].Transform.position - Waypoints[_previousWaypoint].Transform.position).magnitude)
+            _isDoingSmoothCorner = false;
+    }
+
+    void CalculateTargetAndDirection()
+    {
+        if (_isDoingSmoothCorner)
+        {
+            if (_cutCornerFactor < MaxCutCornerFactor)
+            {
+                _cutCornerFactor += CornerIncrementSpeed;
+            }
+            Vector3 smoothDirection = (Waypoints[_currentWayPoint].Transform.position - Waypoints[_previousWaypoint].Transform.position);
+            smoothDirection.Normalize();
+            _target = (Waypoints[_previousWaypoint].Transform.position + (smoothDirection * _cutCornerFactor));
+
+            //if we're too close to the target to move closer, but not close enough to be ON the line, move on
+            if ((_target - transform.position).magnitude < 0.1f)
+            {
+                _target = Waypoints[_currentWayPoint].Transform.position;
+                _isDoingSmoothCorner = false;
+            }
+
+            _direction = (_target - transform.position).normalized;
+            Debug.DrawLine(transform.position, _target, Color.red);
+        }
+        else
+        {
+            _target = Waypoints[_currentWayPoint].Transform.position;
+            _direction = (_target - transform.position).normalized;
+        }
+    }
+
+    void checkIfWeShouldAvoidPlayer()
+    {
+        
     }
 }

@@ -43,6 +43,7 @@ GameObject:
   - component: {fileID: 114713381339948376}
   - component: {fileID: 136766719360970622}
   - component: {fileID: 195674894704238030}
+  - component: {fileID: 114621229205284934}
   m_Layer: 8
   m_Name: Enemy
   m_TagString: Untagged
@@ -131,7 +132,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1460160888053582}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 20, y: 0, z: 0}
+  m_LocalPosition: {x: 0.4825573, y: 0.83233523, z: 0.18805552}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4088246045046046}
@@ -255,6 +256,20 @@ MonoBehaviour:
   - {r: 0.52205884, g: 0.011516015, b: 0.44459707, a: 1}
   - {r: 0.32413793, g: 1, b: 0, a: 1}
   - {r: 0, g: 0.74264705, b: 0.37388435, a: 1}
+--- !u!114 &114621229205284934
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1439848515101160}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da038ad873abbef439221d2f2eb40f53, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Angle: 45
+  _RotationSpeed: 0.25
+  ShouldRotate: 0
 --- !u!114 &114713381339948376
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -268,11 +283,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Waypoints: []
   Speed: 4
-  CutCornerDistance: 5
+  CutCornerDistance: 2
   _nextWayPoint: 0
   MaxCutCornerFactor: 5
   CornerIncrementSpeed: 0.1
-  _DetectionRadius: 5
+  _DetectionRadius: 7.5
   _LookAtPlayerRotationSpeedMultiplier: 2
 --- !u!136 &136228291829893594
 CapsuleCollider:

@@ -226,10 +226,8 @@ public class Patrol : MonoBehaviour
             if (Vector3.Angle(Player.transform.position, transform.forward) % ((360 * Math.PI)/180) < 30)
             {
                 RaycastHit hit;
-                Vector3 transformPositionLow = transform.position;
-                transformPositionLow.y = 0.5f;
                 Vector3 direction = (Player.transform.position - transform.position).normalized;
-                if (Physics.Raycast(transformPositionLow, direction, out hit))
+                if (Physics.Raycast(transform.position, direction, out hit))
                 {
                     if (hit.collider.gameObject.name == "Player")
                     {

@@ -108,6 +108,48 @@ NavMeshSettings:
     tileSize: 256
     accuratePlacement: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1001 &50071836
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4652819463106594, guid: b27f91fbbf994334eaf056dd907a8a95, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 50.534042
+      objectReference: {fileID: 0}
+    - target: {fileID: 4652819463106594, guid: b27f91fbbf994334eaf056dd907a8a95, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 157.9527
+      objectReference: {fileID: 0}
+    - target: {fileID: 4652819463106594, guid: b27f91fbbf994334eaf056dd907a8a95, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: -124.20569
+      objectReference: {fileID: 0}
+    - target: {fileID: 4652819463106594, guid: b27f91fbbf994334eaf056dd907a8a95, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4652819463106594, guid: b27f91fbbf994334eaf056dd907a8a95, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4652819463106594, guid: b27f91fbbf994334eaf056dd907a8a95, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4652819463106594, guid: b27f91fbbf994334eaf056dd907a8a95, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4652819463106594, guid: b27f91fbbf994334eaf056dd907a8a95, type: 2}
+      propertyPath: m_RootOrder
+      value: 8
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: b27f91fbbf994334eaf056dd907a8a95, type: 2}
+  m_IsPrefabParent: 0
 --- !u!1 &98728782
 GameObject:
   m_ObjectHideFlags: 0
@@ -467,8 +509,10 @@ MonoBehaviour:
   - {fileID: 1275250939}
   - {fileID: 177104836}
   Speed: 5
+  CutCornerDistance: 5
   _currentWayPoint: 0
-  ParticlesSystemGameObject: {fileID: 0}
+  _nextWayPoint: 0
+  ParticleSys: {fileID: 0}
 --- !u!1 &1275250938
 GameObject:
   m_ObjectHideFlags: 0

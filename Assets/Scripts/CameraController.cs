@@ -24,17 +24,25 @@ public class CameraController : MonoBehaviour
             _durationRemaining -= Time.deltaTime;
             _durationRemaining = Mathf.Max(0.0f, _durationRemaining);
 
-            float durationScale = _durationRemaining / Duration;
-            durationScale = Mathf.Clamp01(durationScale);
+            if (_durationRemaining == 0.0f)
+            {
+                _shakeOffset = Vector3.zero;
+                _camera.transform.position = _cameraStartingPosition;
+            }
+            else
+            {
+                float durationScale = _durationRemaining / Duration;
+                durationScale = Mathf.Clamp01(durationScale);
 
-            _shakeOffset += 
-                new Vector3(
-                    Random.Range(-Intensity, Intensity), 
-                    Random.Range(-Intensity, Intensity), 
-                    0.0f) * 
-                    durationScale;
+                _shakeOffset += 
+                    new Vector3(
+                        Random.Range(-Intensity, Intensity), 
+                        0.0f,
+                        Random.Range(-Intensity, Intensity));
+                _shakeOffset *= durationScale;
 
-            _camera.transform.position = _cameraStartingPosition + _shakeOffset;
+                _camera.transform.position = _cameraStartingPosition + _shakeOffset;
+            }
         }
     }
 

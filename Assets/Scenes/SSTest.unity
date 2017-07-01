@@ -747,7 +747,7 @@ Prefab:
     - target: {fileID: 114713381339948376, guid: 4510c2bf6e6a9aa48a0e275ba6860a2c,
         type: 2}
       propertyPath: _DetectionRadius
-      value: 6
+      value: 7.5
       objectReference: {fileID: 0}
     - target: {fileID: 114713381339948376, guid: 4510c2bf6e6a9aa48a0e275ba6860a2c,
         type: 2}
@@ -881,6 +881,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Angle: 45
   _RotationSpeed: 0.25
+  ShouldRotate: 1
 --- !u!23 &1918208581
 MeshRenderer:
   m_ObjectHideFlags: 0

@@ -136,7 +136,7 @@ public class Patrol : MonoBehaviour
                         case Actions.Freeze:
                             break;
                         case Actions.Rotate:
-                            //getcomponent -> startrotate?
+                            gameObject.GetComponent<ActorRotation>().ShouldRotate = true;
                             break;
                         default:
                             throw new ArgumentOutOfRangeException();
@@ -145,6 +145,16 @@ public class Patrol : MonoBehaviour
                     {
                         if (Waypoints.Length > 0)
                         {
+                            switch (Waypoints[_currentWayPoint].pauseType)
+                            {
+                                case Actions.Freeze:
+                                    break;
+                                case Actions.Rotate:
+                                    gameObject.GetComponent<ActorRotation>().ShouldRotate = false;
+                                    break;
+                                default:
+                                    throw new ArgumentOutOfRangeException();
+                            }
                             _timePaused = 0;
                             AddCurrentWaypoint();
                         }

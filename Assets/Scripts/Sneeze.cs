@@ -6,10 +6,12 @@ public class Sneeze : MonoBehaviour
 {
 	private ParticleSystem _sys;
 
-	private float _stopOffset = .25f;
+	public float StopOffset = .25f;
+	public bool RainbowColors = false;
+
 	public List<Color> Colors;
 	public static int _colorIndex = -1;
-
+	
 	void Awake ()
 	{
 		_sys = GetComponent<ParticleSystem>();
@@ -27,7 +29,7 @@ public class Sneeze : MonoBehaviour
 
 	void Update () 
 	{
-		if (_sys.time + _stopOffset >= _sys.main.duration)
+		if (_sys.time + StopOffset >= _sys.main.duration)
 		{
 			_sys.Pause();
 		}
@@ -37,12 +39,14 @@ public class Sneeze : MonoBehaviour
 	{
 		_sys.Clear();
 		_sys.time = 0;
-		var main = _sys.main;
+		if (!RainbowColors)
+		{
+			var main = _sys.main;
 
-		main.startColor = new ParticleSystem.MinMaxGradient(Colors[_colorIndex], Colors[_colorIndex + 1]);
-		_colorIndex += 2;
-		_colorIndex %= Colors.Count;
-
+			main.startColor = new ParticleSystem.MinMaxGradient(Colors[_colorIndex], Colors[_colorIndex + 1]);
+			_colorIndex += 2;
+			_colorIndex %= Colors.Count;
+		}
 		_sys.Play();
 	}
 }

@@ -126,7 +126,7 @@ public class GameManager : MonoBehaviour
             }
             else if (_fillImage)
             {
-                if (_fillImage.GetComponent<Image>().fillAmount < _score - 0.1f)
+                if (_fillImage.GetComponent<Image>().fillAmount < _score *2)
                 {
                     _fillImage.GetComponent<Image>().fillAmount += 0.05f;
                 }

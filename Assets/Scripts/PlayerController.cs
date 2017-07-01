@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -31,8 +32,11 @@ public class PlayerController : MonoBehaviour {
 
         if (moveVector != Vector3.zero)
         {
+
             Quaternion targetRotation = Quaternion.LookRotation(moveVector);
             transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, ROTSPEED);
+
+            GetComponent<Wiggle>().WiggleMethod();
         }
 
         bool sneezeDown = Input.GetButtonDown("Sneeze");

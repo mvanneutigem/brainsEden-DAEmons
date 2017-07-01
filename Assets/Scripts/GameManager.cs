@@ -7,15 +7,13 @@ public class GameManager : MonoBehaviour
 {
     public static CameraController Camera;
     public static AudioManager AudioManager;
-    public static PauseMenu PauseMenu;
-    public static VibrationManager VibrationManager;
     private static Canvas _pauseMenuCanvas;
 
     private static GameObject _resumeButton;
 
     public static bool IsSneezing;
     private bool _finishedLevel = false;
-    private float _score = 0;
+    private float _score = -1;
     private GameObject _endScreen;
     private GameObject _fillImage;
 
@@ -42,9 +40,13 @@ public class GameManager : MonoBehaviour
             {
                 FindObjectOfType<EventSystem>().SetSelectedGameObject(null);
             }
-            // TODO: Pause background music?
+
+            OnPause(_paused);
         }
     }
+
+    public delegate void PauseAction(bool paused);
+    public static event PauseAction OnPause;
 
     // Non-static function for menu buttons
     public void SetPaused(bool paused)
@@ -74,24 +76,14 @@ public class GameManager : MonoBehaviour
             Debug.LogError("No camera controller component in scene! (use prefab)");
         }
 
-        AudioManager = GetComponent<AudioManager>();
+        AudioManager = FindObjectOfType<AudioManager>();
         if (!AudioManager)
         {
             Debug.LogError("No audio manager in scene! (use prefab)");
         }
 
-        VibrationManager = GetComponent<VibrationManager>();
-        {
-            Debug.LogError("No vibration manager in scene! (use prefab)");
-        }
-
-        PauseMenu = GameObject.FindGameObjectWithTag("PauseMenu").GetComponent<PauseMenu>();
-        if (!PauseMenu)
-        {
-            Debug.LogError("Pause menu not found! (use prefab)");
-        }
-
-        _pauseMenuCanvas = PauseMenu.GetComponent<Canvas>();
+        GameObject pauseMenu = GameObject.FindGameObjectWithTag("PauseMenu");
+        _pauseMenuCanvas = pauseMenu.GetComponent<Canvas>();
         if (!_pauseMenuCanvas)
         {
             Debug.LogError("Pause menu doesn't have a canvas component!");
@@ -110,7 +102,6 @@ public class GameManager : MonoBehaviour
         if (Input.GetKeyUp(KeyCode.Escape))
         {
             Paused = !Paused;
-            Debug.Log(Paused);
         }
 
         if (_finishedLevel)
@@ -118,11 +109,17 @@ public class GameManager : MonoBehaviour
             if (!_endScreen.activeSelf)
             {
                 _endScreen.SetActive(true);
-                _fillImage = _endScreen.transform.GetChild(0).transform.GetChild(1).transform.GetChild(0).gameObject;
+                if(_score > 0)
+                    _fillImage = _endScreen.transform.GetChild(0).transform.GetChild(1).transform.GetChild(0).gameObject;
+                else
+                {
+                    _endScreen.transform.GetChild(0).gameObject.SetActive(false);
+                    _endScreen.transform.GetChild(1).gameObject.SetActive(true);
+                }
             }
             else if (_fillImage)
             {
-                if (_fillImage.GetComponent<Image>().fillAmount < _score)
+                if (_fillImage.GetComponent<Image>().fillAmount < _score - 0.1f)
                 {
                     _fillImage.GetComponent<Image>().fillAmount += 0.05f;
                 }

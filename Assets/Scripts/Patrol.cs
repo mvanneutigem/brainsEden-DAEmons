@@ -44,6 +44,8 @@ public class Patrol : MonoBehaviour
     public float _DetectionRadius = 5f;
     public float _LookAtPlayerRotationSpeedMultiplier = 2;
 
+    bool _wasStoppedBeforePause = false; // Set to our nav mesh agent's stopped value before pausing
+
     void Awake ()
     {
         _sneezes = GetComponentsInChildren<Sneeze>();
@@ -57,6 +59,16 @@ public class Patrol : MonoBehaviour
         {
             Debug.LogError("Enemy doesn't have Nav Mesh Agent component!");
         }
+    }
+
+    private void OnEnable()
+    {
+        //GameManager.OnPause += OnPause;
+    }
+
+    private void OnDisable()
+    {
+        //GameManager.OnPause -= OnPause;
     }
 
     void Start()
@@ -78,7 +90,11 @@ public class Patrol : MonoBehaviour
 
     void Update()
     {
-        if(GameManager.IsSneezing) return;
+        if (GameManager.IsSneezing || GameManager.Paused)
+        {
+            _navMeshAgent.isStopped = true;
+            return;
+        }
 
         for (int i = 0; i < Waypoints.Length; i++)
         {
@@ -164,8 +180,20 @@ public class Patrol : MonoBehaviour
                 Debug.DrawLine(transform.position, _target, Color.green);
 
                 _navMeshAgent.destination = _target;
-                
             }
+        }
+    }
+
+    public void OnPause(bool paused)
+    {
+        if (paused)
+        {
+            _wasStoppedBeforePause = _navMeshAgent.isStopped;
+            _navMeshAgent.isStopped = true;
+        }
+        else
+        {
+            _navMeshAgent.isStopped = _wasStoppedBeforePause;
         }
     }
 

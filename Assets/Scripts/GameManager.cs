@@ -7,7 +7,6 @@ public class GameManager : MonoBehaviour
 {
     public static CameraController Camera;
     public static AudioManager AudioManager;
-    public static PauseMenu PauseMenu;
     private static Canvas _pauseMenuCanvas;
 
     private static GameObject _resumeButton;
@@ -83,13 +82,8 @@ public class GameManager : MonoBehaviour
             Debug.LogError("No audio manager in scene! (use prefab)");
         }
 
-        PauseMenu = GameObject.FindGameObjectWithTag("PauseMenu").GetComponent<PauseMenu>();
-        if (!PauseMenu)
-        {
-            Debug.LogError("Pause menu not found! (use prefab)");
-        }
-
-        _pauseMenuCanvas = PauseMenu.GetComponent<Canvas>();
+        GameObject pauseMenu = GameObject.FindGameObjectWithTag("PauseMenu");
+        _pauseMenuCanvas = pauseMenu.GetComponent<Canvas>();
         if (!_pauseMenuCanvas)
         {
             Debug.LogError("Pause menu doesn't have a canvas component!");

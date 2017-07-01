@@ -190,7 +190,7 @@ public class GameManager : MonoBehaviour
         rt.antiAliasing = 1;
         RenderTexture.active = rt;
 
-        var cam = GameObject.Find("Main Camera").GetComponent<Camera>();
+        var cam = GameObject.Find("cam sneeze").GetComponent<Camera>();
         cam.targetTexture = rt;
 
         Texture2D screenshot = new Texture2D(Screen.width, Screen.height, TextureFormat.ARGB32, false);

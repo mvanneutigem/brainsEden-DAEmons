@@ -35,12 +35,12 @@ public class Patrol : MonoBehaviour
     public float MaxCutCornerFactor = 5;
     public float CornerIncrementSpeed = 0.1f;
     private bool _hasSneezed = false;
-    private Sneeze _sneeze;
+    private Sneeze[] _sneezes;
     private float _timePauzed = 0;
 
     void Awake ()
     {
-        _sneeze = GetComponentInChildren<Sneeze>();
+        _sneezes = GetComponentsInChildren<Sneeze>();
     }
     void Start()
     {
@@ -171,7 +171,11 @@ public class Patrol : MonoBehaviour
         if (_hasSneezed) return;
         _hasSneezed = true;
         
-        _sneeze.Play();
+        foreach (var sneeze in _sneezes)
+        {
+            sneeze.Play();
+        }
+        
         GameManager.Camera.Shake();
         GameManager.AudioManager.PlaySound(AudioManager.Sound.HeadExplosion);
     }

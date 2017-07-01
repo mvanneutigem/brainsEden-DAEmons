@@ -8,12 +8,12 @@ public class PlayerController : MonoBehaviour {
     private CharacterController _characterController;
     private const float SPEED = 5;
     private const float ROTSPEED = 0.5f;
-    private GameObject _sneezeArea;
+    private Sneeze _sneeze;
 
     void Start ()
     {
         _characterController = this.GetComponent<CharacterController>();
-        _sneezeArea = this.transform.GetChild(0).gameObject;
+        _sneeze = GetComponentInChildren<Sneeze>();
     }
 	
 	void Update ()
@@ -36,13 +36,7 @@ public class PlayerController : MonoBehaviour {
         bool sneezeDown = Input.GetButtonDown("Sneeze");
         if (sneezeDown)
         {
-            _sneezeArea.SetActive(true);
-        }
-
-        bool sneezeUp = Input.GetButtonUp("Sneeze");
-        if (sneezeUp)
-        {
-            _sneezeArea.SetActive(false);
+            _sneeze.Play();
         }
 
     }

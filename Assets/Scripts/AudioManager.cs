@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Audio;
+using System;
 
 public class AudioManager : MonoBehaviour
 {
@@ -137,23 +138,42 @@ public class AudioManager : MonoBehaviour
         SetSourceMixerGroupMixerGroup("Master/SFX/Head Explosion", _headExplosionSource);
 
         _backgroundMusicSource.Play();
+
+        // TODO: DEBUG: Remove to start game unmuted
+        ToggleMuted();
     }
 
     private void Update()
     {
         if (Input.GetKeyUp(KeyCode.M))
         {
-            _musicMuted = !_musicMuted;
+            ToggleMuted();
+        }
+    }
 
-            if (_musicMuted)
-            {
-                _lastMusicVolumeLinear = GetMusicVolumeLinear();
-                SetMusicVolumeLinear(0.0f);
-            }
-            else
-            {
-                SetMusicVolumeLinear(_lastMusicVolumeLinear);
-            }
+    private void OnGUI()
+    {
+        if (Debug.isDebugBuild && _musicMuted)
+        {
+            GUIStyle style = new GUIStyle();
+            style.fontSize = 24;
+            GUI.color = Color.black;
+            GUI.Label(new Rect(10, 10, 100, 100), "M", style);
+        }
+    }
+
+    private void ToggleMuted()
+    {
+        _musicMuted = !_musicMuted;
+
+        if (_musicMuted)
+        {
+            _lastMusicVolumeLinear = GetMusicVolumeLinear();
+            SetMusicVolumeLinear(0.0f);
+        }
+        else
+        {
+            SetMusicVolumeLinear(_lastMusicVolumeLinear);
         }
     }
 

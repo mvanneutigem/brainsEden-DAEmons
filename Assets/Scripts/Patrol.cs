@@ -12,12 +12,18 @@ public class Patrol : MonoBehaviour
     private Quaternion _lookRotation;
     private Vector3 _direction;
     private bool _touched = false;
-    public ParticleSystem ParticleSys;
 
-    // Use this for initialization
+    private bool _hasSneezed = false;
+    private Sneeze _sneeze;
+
+
+    void Awake ()
+    {
+        _sneeze = GetComponentInChildren<Sneeze>();
+    }
+
     void Start()
     {
-        ParticleSys.Stop();
         // _wayPoints.Add(Vector3.zero);
         //for(int i = 0; i < Waypoints.Length)
     }
@@ -39,10 +45,9 @@ public class Patrol : MonoBehaviour
         Sneeze();
     }
 
-    // Update is called once per frame
-        void Update()
-        {
-            float factor = 250;
+    void Update()
+    {
+        //float factor = 250;
         if (!_touched)
         {
             /*if ((Waypoints[_currentWayPoint].position - transform.position).magnitude < CutCornerDistance)
@@ -53,8 +58,13 @@ public class Patrol : MonoBehaviour
                 _direction = ((smoothDirection * factor) - transform.position).normalized;
             }*/
             _direction = (Waypoints[_currentWayPoint].position - transform.position).normalized;
-            _lookRotation = Quaternion.LookRotation(_direction);
-            transform.rotation = Quaternion.Slerp(transform.rotation, _lookRotation, Time.deltaTime * Speed);
+            // Only turn if we aren't on top of the target point
+            if (_direction.magnitude > 0.0f)
+            {
+                _lookRotation = Quaternion.LookRotation(_direction);
+                transform.rotation = Quaternion.Slerp(transform.rotation, _lookRotation, Time.deltaTime * Speed);
+            }
+
             //waypoint reached, select next waypoint
             if (TransSelf.position.Equals(Waypoints[_currentWayPoint].position))
             {
@@ -83,7 +93,11 @@ public class Patrol : MonoBehaviour
 
     void Sneeze()
     {
-        ParticleSys.Play();
-        FindObjectOfType<AudioManager>().PlaySound(AudioManager.Sound.HeadExplosion);
+        if (_hasSneezed) return;
+        _hasSneezed = true;
+        
+        _sneeze.Play();
+        GameManager.Camera.Shake();
+        GameManager.AudioManager.PlaySound(AudioManager.Sound.HeadExplosion);
     }
 }

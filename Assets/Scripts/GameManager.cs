@@ -2,9 +2,11 @@
 
 public class GameManager : MonoBehaviour
 {
+    static public CameraController Camera;
+    static public AudioManager AudioManager;
 
-    private bool _paused;
-    public bool Paused
+    static private bool _paused;
+    static public bool Paused
     {
         get
         {
@@ -19,14 +21,17 @@ public class GameManager : MonoBehaviour
     
 	void Start ()
     {
-        if (!FindObjectOfType<AudioManager>())
+        Camera = FindObjectOfType<CameraController>();
+        if (!Camera)
         {
-            Debug.LogError("You need to add an audio manager to the scene! (prefab)");
+            Debug.LogError("No camera controller component in scene! (use prefab)");
+        }
+
+
+        AudioManager = FindObjectOfType<AudioManager>();
+        if (!AudioManager)
+        {
+            Debug.LogError("No audio manager in scene! (use prefab)");
         }
     }
-	
-	void Update ()
-    {
-		
-	}
 }

@@ -25,7 +25,7 @@ GameObject:
   - component: {fileID: 114560283941587230}
   - component: {fileID: 136774377689584338}
   - component: {fileID: 195746795605411432}
-  m_Layer: 8
+  m_Layer: 11
   m_Name: Enemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -61,7 +61,7 @@ GameObject:
   - component: {fileID: 33500094951625336}
   - component: {fileID: 23259392406899792}
   - component: {fileID: 95140502719805182}
-  m_Layer: 8
+  m_Layer: 11
   m_Name: O_Fatman
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -76,7 +76,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4249897775041102}
-  m_Layer: 8
+  m_Layer: 11
   m_Name: EnemySetup_Fat
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3563,7 +3563,7 @@ ParticleSystem:
   moveWithTransform: 1
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: 1590277896
+  randomSeed: 76543513
   InitialModule:
     serializedVersion: 3
     enabled: 1

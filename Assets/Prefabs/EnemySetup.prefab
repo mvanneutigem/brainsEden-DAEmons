@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 33305406155420534}
   - component: {fileID: 23447195136227970}
   - component: {fileID: 95747493475515600}
-  m_Layer: 8
+  m_Layer: 11
   m_Name: O_Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -44,7 +44,7 @@ GameObject:
   - component: {fileID: 136766719360970622}
   - component: {fileID: 195674894704238030}
   - component: {fileID: 114621229205284934}
-  m_Layer: 8
+  m_Layer: 11
   m_Name: Enemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -59,7 +59,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4839274621497834}
-  m_Layer: 8
+  m_Layer: 11
   m_Name: EnemySetup
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -132,7 +132,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1460160888053582}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.4825573, y: 0.83233523, z: 0.18805552}
+  m_LocalPosition: {x: 20, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4088246045046046}
@@ -393,7 +393,7 @@ ParticleSystem:
   moveWithTransform: 1
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: 1554041278
+  randomSeed: 160812973
   InitialModule:
     serializedVersion: 3
     enabled: 1

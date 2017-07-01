@@ -27,7 +27,8 @@ public class Sneeze : MonoBehaviour
 	void Start()
 	{
 		_sys.Stop();
-	}
+        
+    }
 
 	void Update () 
 	{
@@ -40,7 +41,10 @@ public class Sneeze : MonoBehaviour
 
 	public void Play()
 	{
-		_sys.Clear();
+        GameManager.Camera.Shake();
+        GameManager.VibrationManager.vibrate();
+        GameManager.AudioManager.PlaySound(AudioManager.Sound.HeadExplosion);
+        _sys.Clear();
 		_sys.time = 0;
 		if (!RainbowColors)
 		{

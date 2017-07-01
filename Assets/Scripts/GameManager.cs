@@ -7,6 +7,7 @@ public class GameManager : MonoBehaviour
 {
     public static CameraController Camera;
     public static AudioManager AudioManager;
+    public static VibrationManager VibrationManager;
     private static Canvas _pauseMenuCanvas;
 
     private static GameObject _resumeButton;
@@ -80,6 +81,12 @@ public class GameManager : MonoBehaviour
         if (!AudioManager)
         {
             Debug.LogError("No audio manager in scene! (use prefab)");
+        }
+
+        VibrationManager = GetComponent<VibrationManager>();
+        if (!VibrationManager)
+        {
+            Debug.LogError("No vibration manager in scene! (use prefab)");
         }
 
         GameObject pauseMenu = GameObject.FindGameObjectWithTag("PauseMenu");

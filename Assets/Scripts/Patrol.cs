@@ -95,7 +95,7 @@ public class Patrol : MonoBehaviour
             _navMeshAgent.isStopped = true;
             return;
         }
-
+        
         for (int i = 0; i < Waypoints.Length; i++)
         {
             if (!_touched)
@@ -108,6 +108,7 @@ public class Patrol : MonoBehaviour
                 Debug.DrawLine(Waypoints[i].Transform.position, Waypoints[next].Transform.position, Color.black);
             }
         }
+        GetComponent<Wiggle>().ShouldWiggle = false;
 
         if (!_touched)
         {
@@ -125,6 +126,7 @@ public class Patrol : MonoBehaviour
             //*************
             if (_shouldMove && Waypoints.Length > 0)
             {
+                GetComponent<Wiggle>().ShouldWiggle = true;
                 CheckIfWeShouldCutCorner();
                 CalculateTargetAndDirection();
                 //this check shouldn't be necessary anymore but w/e, gamejam code
@@ -146,6 +148,7 @@ public class Patrol : MonoBehaviour
 
                 if (Vector3.Distance(thisPosNoY, waypointNoY) < minRadius)
                 {
+                    GetComponent<Wiggle>().ShouldWiggle = false;
                     _timePaused += Time.deltaTime;
                     switch (Waypoints[_currentWayPoint].pauseType)
                     {
@@ -180,6 +183,7 @@ public class Patrol : MonoBehaviour
                 Debug.DrawLine(transform.position, _target, Color.green);
 
                 _navMeshAgent.destination = _target;
+                GetComponent<Wiggle>().WiggleMethod();
             }
         }
     }

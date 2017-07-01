@@ -44,6 +44,7 @@ GameObject:
   - component: {fileID: 136766719360970622}
   - component: {fileID: 195674894704238030}
   - component: {fileID: 114621229205284934}
+  - component: {fileID: 114459915543767734}
   m_Layer: 11
   m_Name: Enemy
   m_TagString: Untagged
@@ -248,26 +249,36 @@ MonoBehaviour:
   StopOffset: 0.25
   RainbowColors: 0
   Colors:
-  - {r: 0, g: 0.95686275, b: 0.95686275, a: 1}
-  - {r: 0, g: 0.39607844, b: 0.39607844, a: 1}
-  - {r: 1, g: 0.85882354, b: 0.101960786, a: 1}
-  - {r: 1, g: 0.6431373, b: 0.14509805, a: 1}
-  - {r: 0, g: 0.95686275, b: 0.27058825, a: 1}
-  - {r: 0, g: 0.5294118, b: 0.07058824, a: 1}
-  - {r: 0, g: 0.4627451, b: 0.95686275, a: 1}
-  - {r: 0, g: 0.19607843, b: 0.5294118, a: 1}
-  - {r: 0.45490196, g: 0, b: 0.95686275, a: 1}
-  - {r: 0.18431373, g: 0, b: 0.5294118, a: 1}
-  - {r: 0.92156863, g: 0, b: 0.95686275, a: 1}
-  - {r: 0.50980395, g: 0, b: 0.5294118, a: 1}
-  - {r: 0.95686275, g: 0, b: 0, a: 1}
-  - {r: 0.5294118, g: 0, b: 0, a: 1}
-  - {r: 0.95686275, g: 0.14509805, b: 0, a: 1}
-  - {r: 0.5294118, g: 0, b: 0, a: 1}
-  - {r: 1, g: 1, b: 0, a: 1}
-  - {r: 0.972549, g: 0.7882353, b: 0, a: 1}
-  - {r: 0.45490196, g: 1, b: 0, a: 1}
-  - {r: 0.18431373, g: 0.65882355, b: 0, a: 1}
+  - {r: 0, g: 0.67058825, b: 0.67058825, a: 1}
+  - {r: 0, g: 0.23529412, b: 0.23529412, a: 1}
+  - {r: 1, g: 0.5882353, b: 0.047058824, a: 1}
+  - {r: 0.7254902, g: 0.41960785, b: 0.07058824, a: 1}
+  - {r: 0, g: 0.67058825, b: 0.15294118, a: 1}
+  - {r: 0, g: 0.33333334, b: 0.03137255, a: 1}
+  - {r: 0, g: 0.28627452, b: 0.67058825, a: 1}
+  - {r: 0, g: 0.101960786, b: 0.33333334, a: 1}
+  - {r: 0.2784314, g: 0, b: 0.67058825, a: 1}
+  - {r: 0.09803922, g: 0, b: 0.33333334, a: 1}
+  - {r: 0.6392157, g: 0, b: 0.67058825, a: 1}
+  - {r: 0.50980395, g: 0.101960786, b: 0.33333334, a: 1}
+  - {r: 0.31764707, g: 0, b: 0.33333334, a: 1}
+  - {r: 0.67058825, g: 0, b: 0, a: 1}
+  - {r: 0.33333334, g: 0, b: 0, a: 1}
+  - {r: 0.5294118, g: 0.101960786, b: 0.33333334, a: 1}
+  - {r: 1, g: 0.101960786, b: 0.33333334, a: 1}
+  - {r: 0.972549, g: 0.101960786, b: 0.33333334, a: 1}
+--- !u!114 &114459915543767734
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1439848515101160}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f9f14e7674a05246bca503e0b13a7dc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ShouldWiggle: 1
 --- !u!114 &114621229205284934
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -293,7 +304,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 987a27a6998d7b547a0ba92af48237a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Waypoints: []
+  Waypoints:
+  - Transform: {fileID: 0}
+    pauseTime: 0
+    pauseType: 0
+  - Transform: {fileID: 0}
+    pauseTime: 0
+    pauseType: 0
   Speed: 4
   CutCornerDistance: 2
   _nextWayPoint: 0

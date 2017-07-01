@@ -62,6 +62,8 @@ GameObject:
   - component: {fileID: 114737234898596354}
   - component: {fileID: 136317832524078086}
   - component: {fileID: 95430911360268028}
+  - component: {fileID: 114260901117444830}
+  - component: {fileID: 114892919005602292}
   m_Layer: 8
   m_Name: Player
   m_TagString: Untagged
@@ -308,6 +310,17 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &114260901117444830
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1725638575805072}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f9f14e7674a05246bca503e0b13a7dc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114365451534889730
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -339,6 +352,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 190878503cca14a4aa7280e0791919bb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &114892919005602292
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1725638575805072}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f9f14e7674a05246bca503e0b13a7dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!136 &136317832524078086
@@ -441,7 +465,7 @@ ParticleSystem:
   moveWithTransform: 1
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: -866889169
+  randomSeed: -64556430
   InitialModule:
     serializedVersion: 3
     enabled: 1

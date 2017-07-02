@@ -20,7 +20,7 @@ RenderSettings:
   m_FogDensity: 0.01
   m_LinearFogStart: 0
   m_LinearFogEnd: 300
-  m_AmbientSkyColor: {r: 0.212, g: 0.227, b: 0.259, a: 1}
+  m_AmbientSkyColor: {r: 0.30882353, g: 0.30882353, b: 0.30882353, a: 1}
   m_AmbientEquatorColor: {r: 0.114, g: 0.125, b: 0.133, a: 1}
   m_AmbientGroundColor: {r: 0.047, g: 0.043, b: 0.035, a: 1}
   m_AmbientIntensity: 1
@@ -86,7 +86,8 @@ LightmapSettings:
     m_PVRFilteringAtrousColorSigma: 1
     m_PVRFilteringAtrousNormalSigma: 1
     m_PVRFilteringAtrousPositionSigma: 1
-  m_LightingDataAsset: {fileID: 0}
+  m_LightingDataAsset: {fileID: 112000002, guid: 9681570eb25b86b4da17cca16aa2a163,
+    type: 2}
   m_ShadowMaskMode: 2
 --- !u!196 &4
 NavMeshSettings:
@@ -301,6 +302,11 @@ Prefab:
       propertyPath: m_Name
       value: painting (7)
       objectReference: {fileID: 0}
+    - target: {fileID: 108031095988320322, guid: 7f29b62f3994c5e41b9af8d6eb9e9fa5,
+        type: 2}
+      propertyPath: m_Lightmapping
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 7f29b62f3994c5e41b9af8d6eb9e9fa5, type: 2}
   m_IsPrefabParent: 0
@@ -350,6 +356,11 @@ Prefab:
     - target: {fileID: 1311336550816244, guid: 7f29b62f3994c5e41b9af8d6eb9e9fa5, type: 2}
       propertyPath: m_Name
       value: painting (9)
+      objectReference: {fileID: 0}
+    - target: {fileID: 108031095988320322, guid: 7f29b62f3994c5e41b9af8d6eb9e9fa5,
+        type: 2}
+      propertyPath: m_Lightmapping
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 7f29b62f3994c5e41b9af8d6eb9e9fa5, type: 2}
@@ -785,6 +796,11 @@ Prefab:
       propertyPath: m_Name
       value: painting (5)
       objectReference: {fileID: 0}
+    - target: {fileID: 108031095988320322, guid: 7f29b62f3994c5e41b9af8d6eb9e9fa5,
+        type: 2}
+      propertyPath: m_Lightmapping
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 7f29b62f3994c5e41b9af8d6eb9e9fa5, type: 2}
   m_IsPrefabParent: 0
@@ -930,7 +946,7 @@ Light:
   m_CullingMask:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_Lightmapping: 4
+  m_Lightmapping: 2
   m_AreaSize: {x: 1, y: 1}
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
@@ -1714,6 +1730,11 @@ Prefab:
       propertyPath: m_Name
       value: painting (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 108031095988320322, guid: 7f29b62f3994c5e41b9af8d6eb9e9fa5,
+        type: 2}
+      propertyPath: m_Lightmapping
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 7f29b62f3994c5e41b9af8d6eb9e9fa5, type: 2}
   m_IsPrefabParent: 0
@@ -2053,6 +2074,11 @@ Prefab:
     - target: {fileID: 1311336550816244, guid: 7f29b62f3994c5e41b9af8d6eb9e9fa5, type: 2}
       propertyPath: m_Name
       value: painting (8)
+      objectReference: {fileID: 0}
+    - target: {fileID: 108031095988320322, guid: 7f29b62f3994c5e41b9af8d6eb9e9fa5,
+        type: 2}
+      propertyPath: m_Lightmapping
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 7f29b62f3994c5e41b9af8d6eb9e9fa5, type: 2}
@@ -3287,6 +3313,11 @@ Prefab:
       propertyPath: m_Name
       value: painting (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 108031095988320322, guid: 7f29b62f3994c5e41b9af8d6eb9e9fa5,
+        type: 2}
+      propertyPath: m_Lightmapping
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 7f29b62f3994c5e41b9af8d6eb9e9fa5, type: 2}
   m_IsPrefabParent: 0
@@ -3443,6 +3474,11 @@ Prefab:
     - target: {fileID: 1311336550816244, guid: 7f29b62f3994c5e41b9af8d6eb9e9fa5, type: 2}
       propertyPath: m_Name
       value: painting (11)
+      objectReference: {fileID: 0}
+    - target: {fileID: 108031095988320322, guid: 7f29b62f3994c5e41b9af8d6eb9e9fa5,
+        type: 2}
+      propertyPath: m_Lightmapping
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 7f29b62f3994c5e41b9af8d6eb9e9fa5, type: 2}

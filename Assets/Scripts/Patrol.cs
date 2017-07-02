@@ -95,17 +95,19 @@ public class Patrol : MonoBehaviour
             _navMeshAgent.isStopped = true;
             return;
         }
-        
-        for (int i = 0; i < Waypoints.Length; i++)
+        if (Waypoints.Length > 1)
         {
-            if (!_touched)
+            for (int i = 0; i < Waypoints.Length; i++)
             {
-                int next = i + 1;
-                if (next >= Waypoints.Length)
+                if (!_touched)
                 {
-                    next = 0;
+                    int next = i + 1;
+                    if (next >= Waypoints.Length)
+                    {
+                        next = 0;
+                    }
+                    Debug.DrawLine(Waypoints[i].Transform.position, Waypoints[next].Transform.position, Color.black);
                 }
-                Debug.DrawLine(Waypoints[i].Transform.position, Waypoints[next].Transform.position, Color.black);
             }
         }
         GetComponent<Wiggle>().ShouldWiggle = false;

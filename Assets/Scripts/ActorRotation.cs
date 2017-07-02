@@ -26,7 +26,6 @@ public class ActorRotation : MonoBehaviour
 	        return;
 	    Vector3 rotation = transform.rotation.eulerAngles;
 	    rotation -= _ForwardVector;
-        Debug.Log(rotation);
         if (_IsIncreasing)
 	    {
 	        rotation.y += _RotationSpeed;

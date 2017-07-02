@@ -81,16 +81,16 @@ public class Patrol : MonoBehaviour
 
     void OnParticleCollision(GameObject other)
     {
-        Debug.Log("ChainSneeze activated");
+        //Debug.Log("ChainSneeze activated");
         Sneeze();
         _touched = true;
         gameObject.GetComponent<ActorRotation>().SetTouched();
-        GameManager.IsSneezing = true;
+        GameManager.IsPlayerSneezing = true;
     }
 
     void Update()
     {
-        if (GameManager.IsSneezing || GameManager.Paused)
+        if (GameManager.IsPlayerSneezing || GameManager.Paused)
         {
             _navMeshAgent.isStopped = true;
             return;

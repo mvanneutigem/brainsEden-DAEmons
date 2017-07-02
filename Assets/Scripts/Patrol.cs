@@ -44,7 +44,7 @@ public class Patrol : MonoBehaviour
     private GameObject Player;
     public float _DetectionRadius = 5f;
     public float _LookAtPlayerRotationSpeedMultiplier = 2;
-    public Material GreenMaterial;
+    //public Material GreenMaterial;
 
     bool _wasStoppedBeforePause = false; // Set to our nav mesh agent's stopped value before pausing
 
@@ -82,11 +82,11 @@ public class Patrol : MonoBehaviour
     void OnParticleCollision(GameObject other)
     {
         //Debug.Log("ChainSneeze activated");
-        enemyMat.color = Color.green;
+        enemyMat.color = new Color(0,0.3f,0.3f);
         Sneeze();
         _touched = true;
         gameObject.GetComponent<ActorRotation>().SetTouched();
-        GetComponentInChildren<MeshRenderer>().material = GreenMaterial;
+        //GetComponentInChildren<MeshRenderer>().material = GreenMaterial;
         GameManager.IsPlayerSneezing = true;
     }
 

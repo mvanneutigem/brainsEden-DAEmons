@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Audio;
+using System;
 
 public class AudioManager : MonoBehaviour
 {
@@ -27,7 +28,8 @@ public class AudioManager : MonoBehaviour
     private AudioSource _chainReactionJingleSource;
 
     public AudioClip[] SneezeClips;
-    private AudioSource _sneezeSource;
+    private AudioSource[] _sneezeSources; // Use a pool so we can play multiple sneezes at once
+    private int _numSneezeSources = 10;
 
     public float MasterVolume
     {
@@ -164,11 +166,12 @@ public class AudioManager : MonoBehaviour
         CreateAndInitializeSource(ref _chainReactionJingleSource, ChainReactionMusic);
         SetSourceMixerGroupMixerGroup("Master/SFX/ChainReactionMusic", _chainReactionJingleSource);
 
-        for (int i = 0; i < SneezeClips.Length; i++)
+        _sneezeSources = new AudioSource[_numSneezeSources];
+        for (int i = 0; i < _numSneezeSources; i++)
         {
-            CreateAndInitializeSource(ref _sneezeSource, SneezeClips[i]);
+            CreateAndInitializeSource(ref _sneezeSources[i], null);
+            SetSourceMixerGroupMixerGroup("Master/SFX/Sneeze", _sneezeSources[i]);
         }
-        SetSourceMixerGroupMixerGroup("Master/SFX/Sneeze", _sneezeSource);
     }
 
     private void CreateAndInitializeSource(ref AudioSource source, AudioClip clip)
@@ -202,12 +205,11 @@ public class AudioManager : MonoBehaviour
                 if (restart || !_menuInteractionSource.isPlaying) _menuInteractionSource.Play();
                 break;
             case Sound.Sneeze:
-                if (restart || !_sneezeSource.isPlaying)
-                {
-                    int sneezeIndex = Random.Range(0, SneezeClips.Length);
-                    _sneezeSource.clip = SneezeClips[sneezeIndex];
-                    _sneezeSource.Play();
-                }
+                int sourceIndex = FindFirstEmptySneezeSource();
+                int sneezeIndex = UnityEngine.Random.Range(0, SneezeClips.Length);
+                
+                _sneezeSources[sourceIndex].clip = SneezeClips[sneezeIndex];
+                _sneezeSources[sourceIndex].Play();
                 break;
             case Sound.ChainReactionJingle:
                 if (restart || !_chainReactionJingleSource.isPlaying)
@@ -219,6 +221,17 @@ public class AudioManager : MonoBehaviour
                 Debug.LogError("Sound not handled in PlaySound");
                 break;
         }
+    }
+
+    private int FindFirstEmptySneezeSource()
+    {
+        for (int i = 0; i < _sneezeSources.Length; i++)
+        {
+            if (!_sneezeSources[i].isPlaying) return i;
+        }
+
+        _sneezeSources[0].Stop();
+        return 0;
     }
 
     public void StartChainReaction()
@@ -235,21 +248,25 @@ public class AudioManager : MonoBehaviour
         _backgroundGameMusicSource.Play();
     }
 
-    public bool IsSoundPlaying(Sound sound)
-    {
-        switch (sound)
-        {
-            case Sound.MenuInteraction:
-                return _menuInteractionSource.isPlaying;
-            case Sound.Sneeze:
-                return _sneezeSource.isPlaying;
-            case Sound.ChainReactionJingle:
-                return _chainReactionJingleSource.isPlaying;
-            default:
-                Debug.LogError("Sound not handled in IsSoundPlaying");
-                return false;
-        }
-    }
+    //public bool IsSoundPlaying(Sound sound)
+    //{
+    //    switch (sound)
+    //    {
+    //        case Sound.MenuInteraction:
+    //            return _menuInteractionSource.isPlaying;
+    //        case Sound.Sneeze:
+    //            for (int i = 0; i < _sneezeSources.Length; i++)
+    //            {
+    //                if (_sneezeSource.isPlaying) return true;
+    //            }
+    //            return false;
+    //        case Sound.ChainReactionJingle:
+    //            return _chainReactionJingleSource.isPlaying;
+    //        default:
+    //            Debug.LogError("Sound not handled in IsSoundPlaying");
+    //            return false;
+    //    }
+    //}
 
     public void StopSound(Sound sound)
     {
@@ -259,7 +276,10 @@ public class AudioManager : MonoBehaviour
                 _menuInteractionSource.Stop();
                 break;
             case Sound.Sneeze:
-                _sneezeSource.Stop();
+                for (int i = 0; i < _sneezeSources.Length; i++)
+                {
+                    _sneezeSources[i].Stop();
+                }
                 break;
             case Sound.ChainReactionJingle:
                 _chainReactionJingleSource.Stop();

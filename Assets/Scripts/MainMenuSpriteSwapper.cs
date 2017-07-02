@@ -20,6 +20,7 @@ public class MainMenuSpriteSwapper : MonoBehaviour
     {
         LevelSelectSelectedImage.GetComponent<Image>().enabled = true;
         LevelSelectionMenu.SetActive(true);
+        GameManager.AudioManager.PlaySound(AudioManager.Sound.MenuInteraction);
     }
 
     public void OnLevelSelectHoverExit()
@@ -29,13 +30,14 @@ public class MainMenuSpriteSwapper : MonoBehaviour
 
     public void OnLevelHoverEnter(int levelIndex)
     {
-        // TODO: Show blurred screenshot of each level here
+        GameManager.AudioManager.PlaySound(AudioManager.Sound.MenuInteraction);
     }
 
     public void OnStartHoverEnter()
     {
         StartSelectedImage.GetComponent<Image>().enabled = true;
         LevelSelectionMenu.SetActive(false);
+        GameManager.AudioManager.PlaySound(AudioManager.Sound.MenuInteraction);
     }
 
     public void OnStartHoverExit()
@@ -46,6 +48,7 @@ public class MainMenuSpriteSwapper : MonoBehaviour
     public void OnQuitHoverEnter()
     {
         QuitSelectedImage.GetComponent<Image>().enabled = true;
+        GameManager.AudioManager.PlaySound(AudioManager.Sound.MenuInteraction);
     }
 
     public void OnQuitHoverExit()

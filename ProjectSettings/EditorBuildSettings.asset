@@ -9,17 +9,17 @@ EditorBuildSettings:
     path: Assets/Scenes/MainMenu.unity
     guid: ec1b19db5d5a5df448ba3379fc0d27da
   - enabled: 1
-    path: Assets/Scenes/Levels/Level_Joram2.unity
-    guid: 5831118b1be86304ebb2a659f73b50b4
-  - enabled: 1
     path: Assets/Scenes/Levels/Level_Joram3.unity
     guid: d4a0c1b6aa79189479d9e3ff3c184df4
   - enabled: 1
     path: Assets/Scenes/Levels/Level_Joram4.unity
     guid: 64e16322d7fa5894cbb3e16f73863aba
   - enabled: 1
-    path: Assets/Scenes/Levels/Level_AJ.unity
-    guid: 1a2802731bcb8c24d80ad9553553b720
+    path: Assets/Scenes/Levels/Level_Marieke_Small2.unity
+    guid: fd5234fa545cb5a4c879e4008423ac8c
   - enabled: 1
     path: Assets/Scenes/Levels/Level_Marieke_Small.unity
     guid: 17f5983e4fbc8cf4e9f2daf0d0c2e27d
+  - enabled: 1
+    path: Assets/Scenes/Levels/Level_Joram2.unity
+    guid: 5831118b1be86304ebb2a659f73b50b4

@@ -292,7 +292,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Angle: 45
   _RotationSpeed: 0.25
-  ShouldRotate: 0
+  ShouldRotate: 1
 --- !u!114 &114713381339948376
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -304,13 +304,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 987a27a6998d7b547a0ba92af48237a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Waypoints:
-  - Transform: {fileID: 0}
-    pauseTime: 0
-    pauseType: 0
-  - Transform: {fileID: 0}
-    pauseTime: 0
-    pauseType: 0
+  Waypoints: []
   Speed: 4
   CutCornerDistance: 2
   _nextWayPoint: 0

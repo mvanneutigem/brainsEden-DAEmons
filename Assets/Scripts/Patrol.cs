@@ -84,7 +84,7 @@ public class Patrol : MonoBehaviour
         Debug.Log("ChainSneeze activated");
         Sneeze();
         _touched = true;
-        
+        gameObject.GetComponent<ActorRotation>().SetTouched();
         GameManager.IsSneezing = true;
     }
 
@@ -157,7 +157,7 @@ public class Patrol : MonoBehaviour
                         case Actions.Freeze:
                             break;
                         case Actions.Rotate:
-                            gameObject.GetComponent<ActorRotation>().ShouldRotate = true;
+                            gameObject.GetComponent<ActorRotation>().SetShouldRotate(true);
                             break;
                         default:
                             throw new ArgumentOutOfRangeException();
@@ -171,7 +171,7 @@ public class Patrol : MonoBehaviour
                                 case Actions.Freeze:
                                     break;
                                 case Actions.Rotate:
-                                    gameObject.GetComponent<ActorRotation>().ShouldRotate = false;
+                                    gameObject.GetComponent<ActorRotation>().SetShouldRotate(false);
                                     break;
                                 default:
                                     throw new ArgumentOutOfRangeException();

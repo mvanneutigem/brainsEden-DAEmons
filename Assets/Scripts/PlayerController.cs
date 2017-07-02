@@ -40,7 +40,7 @@ public class PlayerController : MonoBehaviour {
         }
 
         bool sneezeDown = Input.GetButtonDown("Sneeze");
-        if (sneezeDown)
+        if (sneezeDown && !GameManager.ResumedThisFrame)
         {
             _sneeze.Play();
         }

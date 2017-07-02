@@ -12,7 +12,7 @@ public class GameManager : MonoBehaviour
 
     private static GameObject _resumeButton;
 
-    public static bool IsSneezing;
+    public static bool IsPlayerSneezing = false;
     private bool _finishedLevel = false;
     private float _score = -1;
     private GameObject _endScreen;
@@ -70,6 +70,8 @@ public class GameManager : MonoBehaviour
     void Awake()
     {
         _finishedLevel = false;
+        IsPlayerSneezing = false;
+
         Camera = FindObjectOfType<CameraController>();
         if (!Camera)
         {
@@ -129,46 +131,47 @@ public class GameManager : MonoBehaviour
                 {
                     _fillImage.GetComponent<Image>().fillAmount += 0.05f;
                 }
-
             }
         }
-
-        if (IsSneezing)
+        else
         {
-            bool isSneezing = false;
-            bool doneSneezing = true;
-
-            foreach (var sneeze in _sneezes)
+            if (IsPlayerSneezing)
             {
-                if (sneeze.IsSneezing())
+                bool isAnyoneSneezing = false;
+                bool doneSneezing = true;
+
+                foreach (var sneeze in _sneezes)
                 {
-                    isSneezing = true;
-                    break;
+                    if (sneeze.IsSneezing())
+                    {
+                        isAnyoneSneezing = true;
+                        break;
+                    }
+
+                    if (!sneeze.HasSneezed() && doneSneezing)
+                    {
+                        doneSneezing = false;
+                    }
                 }
 
-                if (!sneeze.HasSneezed() && doneSneezing)
+                if (isAnyoneSneezing)
                 {
-                    doneSneezing = false;
-                }
-            }
-
-            if (isSneezing)
-            {
-                print("Still sneezing");
-            }
-            else
-            {
-                if (doneSneezing)
-                {
-                    _score = CalculateColourPercentage();
-                    //Debug.Log("Percentage colored: " + );
-                    print("everybody sneezed");
+                    //print("Still sneezing");
                 }
                 else
                 {
-                    print("not everybody sneezed");
+                    if (doneSneezing)
+                    {
+                        _score = CalculateColourPercentage();
+                        //Debug.Log("Percentage colored: " + );
+                        //print("everybody sneezed");
+                    }
+                    else
+                    {
+                        //print("not everybody sneezed");
+                    }
+                    _finishedLevel = true;
                 }
-                _finishedLevel = true;
             }
         }
     }

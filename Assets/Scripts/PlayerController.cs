@@ -19,7 +19,7 @@ public class PlayerController : MonoBehaviour {
 	
 	void Update ()
     {
-        if (GameManager.IsSneezing || GameManager.Paused) return;
+        if (GameManager.IsPlayerSneezing || GameManager.Paused) return;
         
         float hInput = Input.GetAxisRaw("Horizontal");
         float vInput = Input.GetAxisRaw("Vertical");

@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 198752412284256388}
   - component: {fileID: 199552786690561940}
   - component: {fileID: 114526058316364984}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Sneeze Player
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
@@ -36,7 +36,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1332916053557188}
   m_LocalRotation: {x: 0.5860283, y: -0.39569044, z: 0.39569044, w: 0.5860283}
-  m_LocalPosition: {x: 10.510117, y: 31.703588, z: -62.053944}
+  m_LocalPosition: {x: 0, y: 2.61, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -76,7 +76,7 @@ ParticleSystem:
   looping: 0
   prewarm: 0
   playOnAwake: 0
-  autoRandomSeed: 1
+  autoRandomSeed: 0
   startDelay:
     serializedVersion: 2
     minMaxState: 0
@@ -121,7 +121,7 @@ ParticleSystem:
   moveWithTransform: 1
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: -1853357183
+  randomSeed: -64556430
   InitialModule:
     serializedVersion: 3
     enabled: 1

@@ -21,6 +21,8 @@ public class GameManager : MonoBehaviour
     private GameObject _endScreen;
     private GameObject _fillImage;
 
+    public static bool ResumedThisFrame = false;
+
     static private bool _paused;
     static public bool Paused
     {
@@ -58,6 +60,7 @@ public class GameManager : MonoBehaviour
     // Non-static function for menu buttons
     public void SetPaused(bool paused)
     {
+        ResumedThisFrame = true;
         Paused = paused;
     }
 
@@ -122,6 +125,7 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
+        ResumedThisFrame = false;
         if (Input.GetButtonUp("Cancel"))
         {
             Paused = !Paused;

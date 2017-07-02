@@ -222,7 +222,7 @@ public class Patrol : MonoBehaviour
     void Sneeze()
     {
         if (_touched) return;
-        _navMeshAgent.isStopped = true;
+        if (_navMeshAgent) _navMeshAgent.isStopped = true;
 
         foreach (var sneeze in _sneezes)
         {

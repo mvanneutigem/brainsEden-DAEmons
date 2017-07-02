@@ -14,6 +14,7 @@ public class GameManager : MonoBehaviour
 
     private static GameObject _resumeButton;
     private static GameObject _retryButton;
+    private static GameObject _successBackButton;
 
     public static bool IsPlayerSneezing = false;
     private bool _finishedLevel = false;
@@ -113,6 +114,7 @@ public class GameManager : MonoBehaviour
 
         _resumeButton = GameObject.Find("ResumeButton");
         _retryButton = GameObject.Find("RetryButton");
+        _successBackButton = GameObject.Find("SuccessBackButton");
 
         _endScreen = GameObject.Find("EndScreen");
         if (_endScreen)
@@ -132,13 +134,26 @@ public class GameManager : MonoBehaviour
             return;
         }
 
+
         if (_finishedLevel)
         {
+            if (_score > 0)
+            {
+                if (Input.GetButtonUp("Sneeze"))
+                {
+                    SceneManager.LoadScene(0);
+                }
+            }
+
             if (!_endScreen.activeSelf)
             {
                 _endScreen.SetActive(true);
                 if(_score > 0)
                 {
+                    if (Input.GetButtonUp("Sneeze"))
+                    {
+                        SceneManager.LoadScene(0);
+                    }
                     _endScreen.transform.GetChild(0).gameObject.SetActive(true);
                     _endScreen.transform.GetChild(1).gameObject.SetActive(false);   
                     _fillImage = _endScreen.transform.GetChild(0).transform.GetChild(1).transform.GetChild(0).gameObject;
@@ -199,8 +214,17 @@ public class GameManager : MonoBehaviour
                     }
                     _finishedLevel = true;
 
-                    FindObjectOfType<EventSystem>().SetSelectedGameObject(_retryButton);
-                    _retryButton.GetComponent<UnityEngine.UI.Button>().Select();
+                    if (_score > 0)
+                    {
+                        if (Input.GetButtonUp("Sneeze"))
+                        {
+                            FindObjectOfType<LevelManager>().LoadMainMenu();
+                        }
+                    }
+                    else
+                    {
+                        FindObjectOfType<EventSystem>().SetSelectedGameObject(_retryButton);
+                    }
                 }
             }
         }

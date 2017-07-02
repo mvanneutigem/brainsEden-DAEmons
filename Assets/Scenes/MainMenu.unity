@@ -2069,6 +2069,7 @@ MonoBehaviour:
   GameBackgroundMusicClip: {fileID: 8300000, guid: 101fd8dbfb95a81499a3d6f362b2826d,
     type: 3}
   MenuInteraction: {fileID: 8300000, guid: e28752af69d846b4b9147f72cb411f78, type: 3}
+  ChainReactionMusic: {fileID: 0}
   SneezeClips:
   - {fileID: 8300000, guid: 8dd07c6edd42f0547a81c81be2a3f18f, type: 3}
   - {fileID: 8300000, guid: 70cd9962b6c5ddb4da386356235ec8e3, type: 3}

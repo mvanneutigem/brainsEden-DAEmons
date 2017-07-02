@@ -14,35 +14,51 @@ public class ActorRotation : MonoBehaviour
     // Use this for initialization
     void Start ()
 	{
-	    _ForwardVector = transform.forward;
-	}
+	    _ForwardVector = transform.localRotation.eulerAngles;
+    }
 	
 	// Update is called once per frame
 	void Update ()
 	{
+	    if (GameManager.IsPlayerSneezing)
+	        return;
 	    if (!ShouldRotate)
 	        return;
 	    if (_touched)
 	        return;
-	    Vector3 rotation = transform.rotation.eulerAngles;
-	    rotation -= _ForwardVector;
+        Vector3 targetDir = _ForwardVector;
+        Quaternion Target = Quaternion.identity;
+	    
         if (_IsIncreasing)
 	    {
-	        rotation.y += _RotationSpeed;
-	        if (rotation.y > Angle)
-                //if (rotation.y < 180 && rotation.y > Angle)
+            targetDir.y += Angle;
+	        if (targetDir.y > 360)
+	        {
+	            targetDir.y -= 360;
+	        }
+            Target = Quaternion.Euler(targetDir);
+
+	        if (Quaternion.Angle(transform.rotation, Target) < 1)
+	        {
 	            _IsIncreasing = false;
-	    }
+	        }
+        }
 	    else
 	    {
-            rotation.y -= _RotationSpeed;
-            if (rotation.y < 0 && rotation.y <  -Angle)
-                //if (rotation.y > 180 && rotation.y < 360 - Angle)
+            targetDir.y -= Angle;
+            if (targetDir.y < 360)
+            {
+                targetDir.y += 360;
+            }
+            Target = Quaternion.Euler(targetDir);
+            if (Quaternion.Angle(transform.rotation, Target) < 1)
+            {
                 _IsIncreasing = true;
+            }
         }
-	    rotation += _ForwardVector;
-        transform.rotation = Quaternion.Euler(rotation);
-	}
+
+        transform.rotation = Quaternion.Slerp(transform.rotation, Target, Time.deltaTime * _RotationSpeed);
+    }
 
     public void SetShouldRotate(bool value)
     {

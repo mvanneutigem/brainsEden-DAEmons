@@ -9,11 +9,11 @@ EditorBuildSettings:
     path: Assets/Scenes/MainMenu.unity
     guid: ec1b19db5d5a5df448ba3379fc0d27da
   - enabled: 1
+    path: Assets/Scenes/Levels/Level_Joram2.unity
+    guid: 5831118b1be86304ebb2a659f73b50b4
+  - enabled: 1
     path: Assets/Scenes/Levels/Level_AJ.unity
     guid: 1a2802731bcb8c24d80ad9553553b720
-  - enabled: 1
-    path: Assets/Scenes/Levels/Level_Joram.unity
-    guid: ab192270a75973848ba06b11dec47aca
   - enabled: 1
     path: Assets/Scenes/Levels/Level_Stijn.unity
     guid: cf622bcb1d4af1b48acf943a59bd2556

@@ -20,6 +20,8 @@ public class ActorRotation : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
 	{
+	    if (GameManager.IsPlayerSneezing)
+	        return;
 	    if (!ShouldRotate)
 	        return;
 	    if (_touched)

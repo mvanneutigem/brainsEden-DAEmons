@@ -7,7 +7,7 @@ public class PlayerController : MonoBehaviour {
 
 
     private CharacterController _characterController;
-    private const float SPEED = 5;
+    private const float SPEED = 8;
     private const float ROTSPEED = 0.5f;
     private Sneeze _sneeze;
 

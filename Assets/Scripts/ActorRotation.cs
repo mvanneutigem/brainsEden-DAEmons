@@ -20,25 +20,29 @@ public class ActorRotation : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
 	{
-        Debug.Log(ShouldRotate);
 	    if (!ShouldRotate)
 	        return;
 	    if (_touched)
 	        return;
 	    Vector3 rotation = transform.rotation.eulerAngles;
-	    if (_IsIncreasing)
+	    rotation -= _ForwardVector;
+        Debug.Log(rotation);
+        if (_IsIncreasing)
 	    {
 	        rotation.y += _RotationSpeed;
-	        if (rotation.y < _ForwardVector.y + 180 && rotation.y > _ForwardVector.y + Angle)
+	        if (rotation.y > Angle)
+                //if (rotation.y < 180 && rotation.y > Angle)
 	            _IsIncreasing = false;
 	    }
 	    else
 	    {
             rotation.y -= _RotationSpeed;
-            if (rotation.y > _ForwardVector.y + 180 && rotation.y < _ForwardVector.y + (360 - Angle))
+            if (rotation.y < 0 && rotation.y <  -Angle)
+                //if (rotation.y > 180 && rotation.y < 360 - Angle)
                 _IsIncreasing = true;
         }
-	    transform.rotation = Quaternion.Euler(rotation);
+	    rotation += _ForwardVector;
+        transform.rotation = Quaternion.Euler(rotation);
 	}
 
     public void SetShouldRotate(bool value)
@@ -49,7 +53,8 @@ public class ActorRotation : MonoBehaviour
             {
                 //shouldrotate gets enabled for the first time in this frame
                 _ForwardVector = transform.localRotation.eulerAngles;
-                Debug.Log("set forward");
+                //Debug.Log("set forward");
+                //Debug.Log(_ForwardVector);
             }
         }
         ShouldRotate = value;

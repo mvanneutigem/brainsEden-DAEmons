@@ -59,10 +59,12 @@ MonoBehaviour:
   Mixer: {fileID: 24100000, guid: 1f184edfd0755d846b91f1303537fbb6, type: 2}
   MenuBackgroundMusicClip: {fileID: 8300000, guid: ac876f6c2d65c1942bf31ed4dfd44d41,
     type: 3}
-  GameBackgroundMusicClip: {fileID: 8300000, guid: a4e5c0a925e8d5348bcab223b6ea1273,
+  GameBackgroundChatterClip: {fileID: 8300000, guid: 101fd8dbfb95a81499a3d6f362b2826d,
+    type: 3}
+  GameBackgroundMusicClip: {fileID: 8300000, guid: b005a7cc46addb04696bf10ff6eb7e2b,
     type: 3}
   MenuInteraction: {fileID: 8300000, guid: e28752af69d846b4b9147f72cb411f78, type: 3}
-  HeadExplosion: {fileID: 8300000, guid: 50a52654b26a61c4e943a4e6b9b16e9f, type: 3}
+  ChainReactionMusic: {fileID: 8300000, guid: 8bf631e8fb4da9749a739df57bc21a9e, type: 3}
   SneezeClips:
   - {fileID: 8300000, guid: 8dd07c6edd42f0547a81c81be2a3f18f, type: 3}
   - {fileID: 8300000, guid: 70cd9962b6c5ddb4da386356235ec8e3, type: 3}

@@ -3295,21 +3295,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 114256011079261540, guid: 53fefc53a98d8534e805246d5e73f863,
-        type: 2}
-      propertyPath: GameBackgroundMusicClip
-      value: 
-      objectReference: {fileID: 8300000, guid: b005a7cc46addb04696bf10ff6eb7e2b, type: 3}
-    - target: {fileID: 114256011079261540, guid: 53fefc53a98d8534e805246d5e73f863,
-        type: 2}
-      propertyPath: GameBackgroundChatterClip
-      value: 
-      objectReference: {fileID: 8300000, guid: 101fd8dbfb95a81499a3d6f362b2826d, type: 3}
-    - target: {fileID: 114256011079261540, guid: 53fefc53a98d8534e805246d5e73f863,
-        type: 2}
-      propertyPath: ChainReactionMusic
-      value: 
-      objectReference: {fileID: 8300000, guid: 8bf631e8fb4da9749a739df57bc21a9e, type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 53fefc53a98d8534e805246d5e73f863, type: 2}
   m_IsPrefabParent: 0
@@ -3506,16 +3491,6 @@ Prefab:
       propertyPath: m_Pivot.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1848709514572302, guid: 4421ba0902301dc4e9b85af07df2bae4, type: 2}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 114315430391465356, guid: 4421ba0902301dc4e9b85af07df2bae4,
-        type: 2}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300000, guid: 7cb7eaaf3677a8948949a0ebd9f92d3f,
-        type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 4421ba0902301dc4e9b85af07df2bae4, type: 2}
   m_IsPrefabParent: 0

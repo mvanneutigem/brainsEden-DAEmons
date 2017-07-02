@@ -83,7 +83,6 @@ public class GameManager : MonoBehaviour
     void Awake()
     {
         CurrentGameSceneIndex = SceneManager.GetActiveScene().buildIndex;
-        Debug.Log("awake: " + CurrentGameSceneIndex);
         _finishedLevel = false;
         IsPlayerSneezing = false;
 
@@ -99,7 +98,7 @@ public class GameManager : MonoBehaviour
             Debug.LogError("No audio manager in scene! (use prefab)");
         }
 
-        VibrationManager = GetComponent<VibrationManager>();
+        VibrationManager = FindObjectOfType<VibrationManager>();
         if (!VibrationManager)
         {
             Debug.LogError("No vibration manager in scene! (use prefab)");

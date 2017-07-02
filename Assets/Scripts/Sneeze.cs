@@ -20,7 +20,6 @@ public class Sneeze : MonoBehaviour
 		if (_colorIndex == -1)
 		{
 			_colorIndex = Random.Range(0, Colors.Count / 2) * 2;
-			print(_colorIndex);
 		}
 	}
 	

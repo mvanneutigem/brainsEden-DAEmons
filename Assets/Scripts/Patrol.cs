@@ -196,14 +196,17 @@ public class Patrol : MonoBehaviour
 
     public void OnPause(bool paused)
     {
-        if (paused)
+        if (_navMeshAgent)
         {
-            _wasStoppedBeforePause = _navMeshAgent.isStopped;
-            _navMeshAgent.isStopped = true;
-        }
-        else
-        {
-            _navMeshAgent.isStopped = _wasStoppedBeforePause;
+            if (paused)
+            {
+                _wasStoppedBeforePause = _navMeshAgent.isStopped;
+                _navMeshAgent.isStopped = true;
+            }
+            else
+            {
+                _navMeshAgent.isStopped = _wasStoppedBeforePause;
+            }
         }
     }
 

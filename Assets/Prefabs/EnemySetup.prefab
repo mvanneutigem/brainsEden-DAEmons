@@ -269,7 +269,7 @@ MonoBehaviour:
   MaxCutCornerFactor: 5
   CornerIncrementSpeed: 0.1
   _DetectionRadius: 7.5
-  _LookAtPlayerRotationSpeedMultiplier: 2
+  _LookAtPlayerRotationSpeedMultiplier: 6
 --- !u!136 &136766719360970622
 CapsuleCollider:
   m_ObjectHideFlags: 1

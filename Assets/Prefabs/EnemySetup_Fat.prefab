@@ -250,12 +250,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Waypoints: []
   Speed: 2
-  CutCornerDistance: 5
+  CutCornerDistance: 2
   _nextWayPoint: 0
   MaxCutCornerFactor: 5
   CornerIncrementSpeed: 0.1
   _DetectionRadius: 5
-  _LookAtPlayerRotationSpeedMultiplier: 2
+  _LookAtPlayerRotationSpeedMultiplier: 6
 --- !u!114 &114569484249471864
 MonoBehaviour:
   m_ObjectHideFlags: 1

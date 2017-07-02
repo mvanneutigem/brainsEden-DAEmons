@@ -379,7 +379,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Angle: 45
   _RotationSpeed: 0.25
-  ShouldRotate: 1
+  ShouldRotate: 0
 --- !u!136 &136537312384975506
 CapsuleCollider:
   m_ObjectHideFlags: 1

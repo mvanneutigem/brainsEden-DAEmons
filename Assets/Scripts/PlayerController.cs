@@ -7,7 +7,7 @@ public class PlayerController : MonoBehaviour {
 
 
     private CharacterController _characterController;
-    private const float SPEED = 5;
+    private const float SPEED = 8;
     private const float ROTSPEED = 0.5f;
     private Sneeze _sneeze;
 
@@ -19,7 +19,7 @@ public class PlayerController : MonoBehaviour {
 	
 	void Update ()
     {
-        if (GameManager.IsSneezing || GameManager.Paused) return;
+        if (GameManager.IsPlayerSneezing || GameManager.Paused) return;
         
         float hInput = Input.GetAxisRaw("Horizontal");
         float vInput = Input.GetAxisRaw("Vertical");

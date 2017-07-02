@@ -57,7 +57,7 @@ public class Patrol : MonoBehaviour
         _navMeshAgent = GetComponent<NavMeshAgent>();
         if (!_navMeshAgent)
         {
-            Debug.LogError("Enemy doesn't have Nav Mesh Agent component!");
+            Debug.LogWarning("Enemy doesn't have Nav Mesh Agent component!");
         }
     }
 
@@ -81,16 +81,18 @@ public class Patrol : MonoBehaviour
 
     void OnParticleCollision(GameObject other)
     {
-        Debug.Log("ChainSneeze activated");
+        //Debug.Log("ChainSneeze activated");
         Sneeze();
         _touched = true;
         gameObject.GetComponent<ActorRotation>().SetTouched();
-        GameManager.IsSneezing = true;
+        GameManager.IsPlayerSneezing = true;
     }
 
     void Update()
     {
-        if (GameManager.IsSneezing || GameManager.Paused)
+        if (!_navMeshAgent) return;
+
+        if (GameManager.IsPlayerSneezing || GameManager.Paused)
         {
             _navMeshAgent.isStopped = true;
             return;
@@ -220,7 +222,7 @@ public class Patrol : MonoBehaviour
     void Sneeze()
     {
         if (_touched) return;
-        _navMeshAgent.isStopped = true;
+        if (_navMeshAgent) _navMeshAgent.isStopped = true;
 
         foreach (var sneeze in _sneezes)
         {

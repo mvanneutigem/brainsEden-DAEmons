@@ -55,10 +55,6 @@ public class Patrol : MonoBehaviour
         }
 
         _navMeshAgent = GetComponent<NavMeshAgent>();
-        if (!_navMeshAgent)
-        {
-            Debug.LogWarning("Enemy doesn't have Nav Mesh Agent component!");
-        }
     }
 
     private void OnEnable()
@@ -231,7 +227,7 @@ public class Patrol : MonoBehaviour
         
         GameManager.Camera.Shake();
         GameManager.VibrationManager.vibrate();
-        GameManager.AudioManager.PlaySound(AudioManager.Sound.HeadExplosion);
+        GameManager.AudioManager.PlaySound(AudioManager.Sound.Sneeze);
     }
 
     void CheckIfWeShouldCutCorner()

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -42,7 +43,10 @@ public class GameManager : MonoBehaviour
                 FindObjectOfType<EventSystem>().SetSelectedGameObject(null);
             }
 
-            OnPause(_paused);
+            if (OnPause != null)
+            {
+                OnPause(_paused);
+            }
         }
     }
 
@@ -55,20 +59,30 @@ public class GameManager : MonoBehaviour
         Paused = paused;
     }
 
-    public enum GameScene
-    {
-        MainMenu = 0,
-        Game // TODO: Have one for each level?
-    }
-
-    public static GameScene CurrentGameScene;
+    public static int CurrentGameSceneIndex;
 
     public static List<Sneeze> _sneezes;
     public static PlayerController _playerController;
 
+    private void OnEnable()
+    {
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    private void OnDisable()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+    public void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        CurrentGameSceneIndex = scene.buildIndex;
+        AudioManager.OnSceneLoaded(scene.buildIndex);
+    }
 
     void Awake()
     {
+        CurrentGameSceneIndex = SceneManager.GetActiveScene().buildIndex;
         _finishedLevel = false;
         IsPlayerSneezing = false;
 
@@ -84,7 +98,7 @@ public class GameManager : MonoBehaviour
             Debug.LogError("No audio manager in scene! (use prefab)");
         }
 
-        VibrationManager = GetComponent<VibrationManager>();
+        VibrationManager = FindObjectOfType<VibrationManager>();
         if (!VibrationManager)
         {
             Debug.LogError("No vibration manager in scene! (use prefab)");
@@ -156,6 +170,8 @@ public class GameManager : MonoBehaviour
 
                 if (isAnyoneSneezing)
                 {
+                    AudioManager.StartChainReaction();
+                    
                     //print("Still sneezing");
                 }
                 else
@@ -168,6 +184,7 @@ public class GameManager : MonoBehaviour
                     }
                     else
                     {
+                        AudioManager.StopChainReaction();
                         //print("not everybody sneezed");
                     }
                     _finishedLevel = true;

@@ -1181,7 +1181,7 @@ Prefab:
     - target: {fileID: 114713381339948376, guid: 4510c2bf6e6a9aa48a0e275ba6860a2c,
         type: 2}
       propertyPath: Waypoints.Array.data[0].pauseTime
-      value: 5
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 114621229205284934, guid: 4510c2bf6e6a9aa48a0e275ba6860a2c,
         type: 2}
@@ -1794,6 +1794,10 @@ Prefab:
     - target: {fileID: 4088246045046046, guid: 4510c2bf6e6a9aa48a0e275ba6860a2c, type: 2}
       propertyPath: m_LocalRotation.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1460160888053582, guid: 4510c2bf6e6a9aa48a0e275ba6860a2c, type: 2}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 4510c2bf6e6a9aa48a0e275ba6860a2c, type: 2}

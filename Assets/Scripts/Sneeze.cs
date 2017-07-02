@@ -20,7 +20,6 @@ public class Sneeze : MonoBehaviour
 		if (_colorIndex == -1)
 		{
 			_colorIndex = Random.Range(0, Colors.Count / 2) * 2;
-			print(_colorIndex);
 		}
 	}
 	
@@ -43,7 +42,7 @@ public class Sneeze : MonoBehaviour
 	{
         GameManager.Camera.Shake();
         GameManager.VibrationManager.vibrate();
-        GameManager.AudioManager.PlaySound(AudioManager.Sound.HeadExplosion);
+        GameManager.AudioManager.PlaySound(AudioManager.Sound.Sneeze);
         _sys.Clear();
 		_sys.time = 0;
 		if (!RainbowColors)

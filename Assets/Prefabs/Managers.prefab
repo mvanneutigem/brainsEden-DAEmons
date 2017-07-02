@@ -61,8 +61,13 @@ MonoBehaviour:
     type: 3}
   GameBackgroundMusicClip: {fileID: 8300000, guid: a4e5c0a925e8d5348bcab223b6ea1273,
     type: 3}
-  MenuInteraction: {fileID: 8300000, guid: 1ba946f6f7ad88a4ea26ca06c9601084, type: 3}
+  MenuInteraction: {fileID: 8300000, guid: e28752af69d846b4b9147f72cb411f78, type: 3}
   HeadExplosion: {fileID: 8300000, guid: 50a52654b26a61c4e943a4e6b9b16e9f, type: 3}
+  SneezeClips:
+  - {fileID: 8300000, guid: 8dd07c6edd42f0547a81c81be2a3f18f, type: 3}
+  - {fileID: 8300000, guid: 70cd9962b6c5ddb4da386356235ec8e3, type: 3}
+  - {fileID: 8300000, guid: c1c6609a6275c6544b17d00f01b379c0, type: 3}
+  - {fileID: 8300000, guid: 980ae2af68ef8c04fb60a3d90cc59abe, type: 3}
 --- !u!114 &114264376918978014
 MonoBehaviour:
   m_ObjectHideFlags: 1

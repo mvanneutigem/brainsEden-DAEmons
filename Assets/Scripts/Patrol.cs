@@ -144,7 +144,7 @@ public class Patrol : MonoBehaviour
                 //*************
                 //waypoint reached, do waypoint action and select next waypoint
                 float minRadius = 0.01f;
-                Vector2 thisPosNoY = transform.position, waypointNoY = Waypoints[_currentWayPoint].Transform.position;
+                Vector3 thisPosNoY = transform.position, waypointNoY = Waypoints[_currentWayPoint].Transform.position;
                 thisPosNoY.y = 0;
                 waypointNoY.y = 0;
 

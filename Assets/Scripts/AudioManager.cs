@@ -9,7 +9,8 @@ public class AudioManager : MonoBehaviour
     public enum Sound
     {
         MenuInteraction,
-        Sneeze
+        Sneeze,
+        ChainReactionJingle
     }
 
     public AudioClip MenuBackgroundMusicClip;
@@ -21,6 +22,9 @@ public class AudioManager : MonoBehaviour
 
     public AudioClip MenuInteraction;
     private AudioSource _menuInteractionSource;
+
+    public AudioClip ChainReactionMusic;
+    private AudioSource _chainReactionJingleSource;
 
     public AudioClip[] SneezeClips;
     private AudioSource _sneezeSource;
@@ -157,6 +161,9 @@ public class AudioManager : MonoBehaviour
         CreateAndInitializeSource(ref _menuInteractionSource, MenuInteraction);
         SetSourceMixerGroupMixerGroup("Master/SFX/Menu Interaction", _menuInteractionSource);
 
+        CreateAndInitializeSource(ref _chainReactionJingleSource, ChainReactionMusic);
+        SetSourceMixerGroupMixerGroup("Master/SFX/ChainReactionMusic", _chainReactionJingleSource);
+
         for (int i = 0; i < SneezeClips.Length; i++)
         {
             CreateAndInitializeSource(ref _sneezeSource, SneezeClips[i]);
@@ -183,17 +190,9 @@ public class AudioManager : MonoBehaviour
         return group;
     }
 
-    private void OnGamePause(bool paused)
-    {
-        if (paused)
-        {
-            
-        }
-        else
-        {
-           
-        }
-    }
+    //private void OnGamePause(bool paused)
+    //{
+    //}
 
     public void PlaySound(Sound sound, bool restart = true)
     {
@@ -210,8 +209,45 @@ public class AudioManager : MonoBehaviour
                     _sneezeSource.Play();
                 }
                 break;
-            default:
+            case Sound.ChainReactionJingle:
+                if (restart || !_chainReactionJingleSource.isPlaying)
+                {
+                    _chainReactionJingleSource.Play();
+                }
                 break;
+            default:
+                Debug.LogError("Sound not handled in PlaySound");
+                break;
+        }
+    }
+
+    public void StartChainReaction()
+    {
+        PlaySound(Sound.ChainReactionJingle, false);
+        _backgroundChatterSource.Pause();
+        _backgroundGameMusicSource.Pause();
+    }
+
+    public void StopChainReaction()
+    {
+        StopSound(Sound.ChainReactionJingle);
+        _backgroundChatterSource.Play();
+        _backgroundGameMusicSource.Play();
+    }
+
+    public bool IsSoundPlaying(Sound sound)
+    {
+        switch (sound)
+        {
+            case Sound.MenuInteraction:
+                return _menuInteractionSource.isPlaying;
+            case Sound.Sneeze:
+                return _sneezeSource.isPlaying;
+            case Sound.ChainReactionJingle:
+                return _chainReactionJingleSource.isPlaying;
+            default:
+                Debug.LogError("Sound not handled in IsSoundPlaying");
+                return false;
         }
     }
 
@@ -225,7 +261,11 @@ public class AudioManager : MonoBehaviour
             case Sound.Sneeze:
                 _sneezeSource.Stop();
                 break;
+            case Sound.ChainReactionJingle:
+                _chainReactionJingleSource.Stop();
+                break;
             default:
+                Debug.LogError("Sound not handled in StopSound");
                 break;
         }
     }

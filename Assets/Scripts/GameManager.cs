@@ -171,6 +171,8 @@ public class GameManager : MonoBehaviour
 
                 if (isAnyoneSneezing)
                 {
+                    AudioManager.StartChainReaction();
+                    
                     //print("Still sneezing");
                 }
                 else
@@ -183,6 +185,7 @@ public class GameManager : MonoBehaviour
                     }
                     else
                     {
+                        AudioManager.StopChainReaction();
                         //print("not everybody sneezed");
                     }
                     _finishedLevel = true;

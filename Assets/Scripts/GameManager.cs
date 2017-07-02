@@ -21,6 +21,8 @@ public class GameManager : MonoBehaviour
     private GameObject _endScreen;
     private GameObject _fillImage;
 
+    public static bool ResumedThisFrame = false;
+
     static private bool _paused;
     static public bool Paused
     {
@@ -58,6 +60,7 @@ public class GameManager : MonoBehaviour
     // Non-static function for menu buttons
     public void SetPaused(bool paused)
     {
+        ResumedThisFrame = true;
         Paused = paused;
     }
 
@@ -89,10 +92,6 @@ public class GameManager : MonoBehaviour
         IsPlayerSneezing = false;
 
         Camera = FindObjectOfType<CameraController>();
-        if (!Camera)
-        {
-            Debug.LogError("No camera controller component in scene! (use prefab)");
-        }
 
         AudioManager = FindObjectOfType<AudioManager>();
         if (!AudioManager)
@@ -101,32 +100,36 @@ public class GameManager : MonoBehaviour
         }
 
         VibrationManager = FindObjectOfType<VibrationManager>();
-        if (!VibrationManager)
-        {
-            Debug.LogError("No vibration manager in scene! (use prefab)");
-        }
 
         GameObject pauseMenu = GameObject.FindGameObjectWithTag("PauseMenu");
-        _pauseMenuCanvas = pauseMenu.GetComponent<Canvas>();
-        if (!_pauseMenuCanvas)
+        if (pauseMenu)
         {
-            Debug.LogError("Pause menu doesn't have a canvas component!");
+            _pauseMenuCanvas = pauseMenu.GetComponent<Canvas>();
+            if (!_pauseMenuCanvas)
+            {
+                Debug.LogError("Pause menu doesn't have a canvas component!");
+            }
         }
 
-        _resumeButton = GameObject.Find("ResumeButton").gameObject;
-        _retryButton = GameObject.Find("RetryButton").gameObject;
+        _resumeButton = GameObject.Find("ResumeButton");
+        _retryButton = GameObject.Find("RetryButton");
 
         _endScreen = GameObject.Find("EndScreen");
-        _endScreen.SetActive(false);
+        if (_endScreen)
+        {
+            _endScreen.SetActive(false);
+        }
 
         LoadData();
     }
 
     private void Update()
     {
+        ResumedThisFrame = false;
         if (Input.GetButtonUp("Cancel"))
         {
             Paused = !Paused;
+            return;
         }
 
         if (_finishedLevel)
@@ -135,7 +138,11 @@ public class GameManager : MonoBehaviour
             {
                 _endScreen.SetActive(true);
                 if(_score > 0)
+                {
+                    _endScreen.transform.GetChild(0).gameObject.SetActive(true);
+                    _endScreen.transform.GetChild(1).gameObject.SetActive(false);   
                     _fillImage = _endScreen.transform.GetChild(0).transform.GetChild(1).transform.GetChild(0).gameObject;
+                }
                 else
                 {
                     _endScreen.transform.GetChild(0).gameObject.SetActive(false);
@@ -182,7 +189,7 @@ public class GameManager : MonoBehaviour
                     if (doneSneezing)
                     {
                         _score = CalculateColourPercentage();
-                        //Debug.Log("Percentage colored: " + );
+                        Debug.Log("Percentage colored: " + _score);
                         //print("everybody sneezed");
                     }
                     else

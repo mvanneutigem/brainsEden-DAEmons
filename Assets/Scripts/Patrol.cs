@@ -23,7 +23,7 @@ public class Patrol : MonoBehaviour
     public float Speed = 5f;
     public float CutCornerDistance = 5f;
     public int _nextWayPoint = 0;
-    private bool _isDoingSmoothCorner = false;
+    //private bool _isDoingSmoothCorner = false;
     private int _currentWayPoint = 0;
     private int _previousWaypoint = 0;
     private Quaternion _lookRotation;
@@ -32,7 +32,7 @@ public class Patrol : MonoBehaviour
     private bool _touched = false;
     private Material enemyMat;
 
-    private float _cutCornerFactor = 0;
+    //private float _cutCornerFactor = 0;
     public float MaxCutCornerFactor = 5;
     public float CornerIncrementSpeed = 0.1f;
     private Sneeze[] _sneezes;
@@ -196,14 +196,17 @@ public class Patrol : MonoBehaviour
 
     public void OnPause(bool paused)
     {
-        if (paused)
+        if (_navMeshAgent)
         {
-            _wasStoppedBeforePause = _navMeshAgent.isStopped;
-            _navMeshAgent.isStopped = true;
-        }
-        else
-        {
-            _navMeshAgent.isStopped = _wasStoppedBeforePause;
+            if (paused)
+            {
+                _wasStoppedBeforePause = _navMeshAgent.isStopped;
+                _navMeshAgent.isStopped = true;
+            }
+            else
+            {
+                _navMeshAgent.isStopped = _wasStoppedBeforePause;
+            }
         }
     }
 
@@ -241,14 +244,14 @@ public class Patrol : MonoBehaviour
         //if we are within cutcorner distance, start cutting corner
         if (Waypoints[_currentWayPoint].pauseTime == 0 && ((Waypoints[_currentWayPoint].Transform.position - transform.position).magnitude < CutCornerDistance))
         {
-            _isDoingSmoothCorner = true;
-            _cutCornerFactor = 0;
+            //_isDoingSmoothCorner = true;
+           // _cutCornerFactor = 0;
             if (Waypoints.Length > 0)
                 AddCurrentWaypoint();
         }
         //if we are on the line to the next point, stop cutting corner
-        if ((Waypoints[_currentWayPoint].Transform.position - transform.position).magnitude + (Waypoints[_previousWaypoint].Transform.position - transform.position).magnitude == (Waypoints[_currentWayPoint].Transform.position - Waypoints[_previousWaypoint].Transform.position).magnitude)
-            _isDoingSmoothCorner = false;
+        //if ((Waypoints[_currentWayPoint].Transform.position - transform.position).magnitude + (Waypoints[_previousWaypoint].Transform.position - transform.position).magnitude == (Waypoints[_currentWayPoint].Transform.position - Waypoints[_previousWaypoint].Transform.position).magnitude)
+            //_isDoingSmoothCorner = false;
     }
 
     void CalculateTargetAndDirection()

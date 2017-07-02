@@ -89,10 +89,6 @@ public class GameManager : MonoBehaviour
         IsPlayerSneezing = false;
 
         Camera = FindObjectOfType<CameraController>();
-        if (!Camera)
-        {
-            Debug.LogError("No camera controller component in scene! (use prefab)");
-        }
 
         AudioManager = FindObjectOfType<AudioManager>();
         if (!AudioManager)
@@ -101,23 +97,25 @@ public class GameManager : MonoBehaviour
         }
 
         VibrationManager = FindObjectOfType<VibrationManager>();
-        if (!VibrationManager)
-        {
-            Debug.LogError("No vibration manager in scene! (use prefab)");
-        }
 
         GameObject pauseMenu = GameObject.FindGameObjectWithTag("PauseMenu");
-        _pauseMenuCanvas = pauseMenu.GetComponent<Canvas>();
-        if (!_pauseMenuCanvas)
+        if (pauseMenu)
         {
-            Debug.LogError("Pause menu doesn't have a canvas component!");
+            _pauseMenuCanvas = pauseMenu.GetComponent<Canvas>();
+            if (!_pauseMenuCanvas)
+            {
+                Debug.LogError("Pause menu doesn't have a canvas component!");
+            }
         }
 
-        _resumeButton = GameObject.Find("ResumeButton").gameObject;
-        _retryButton = GameObject.Find("RetryButton").gameObject;
+        _resumeButton = GameObject.Find("ResumeButton");
+        _retryButton = GameObject.Find("RetryButton");
 
         _endScreen = GameObject.Find("EndScreen");
-        _endScreen.SetActive(false);
+        if (_endScreen)
+        {
+            _endScreen.SetActive(false);
+        }
 
         LoadData();
     }
@@ -127,6 +125,7 @@ public class GameManager : MonoBehaviour
         if (Input.GetButtonUp("Cancel"))
         {
             Paused = !Paused;
+            return;
         }
 
         if (_finishedLevel)

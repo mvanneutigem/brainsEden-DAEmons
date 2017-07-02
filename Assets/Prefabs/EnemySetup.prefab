@@ -133,7 +133,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1460160888053582}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4.8, y: 0, z: 1.5}
+  m_LocalPosition: {x: 61.98867, y: 24.764484, z: 1.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4088246045046046}
@@ -304,13 +304,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 987a27a6998d7b547a0ba92af48237a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Waypoints:
-  - Transform: {fileID: 0}
-    pauseTime: 0
-    pauseType: 0
-  - Transform: {fileID: 0}
-    pauseTime: 0
-    pauseType: 0
+  Waypoints: []
   Speed: 4
   CutCornerDistance: 2
   _nextWayPoint: 0
@@ -376,7 +370,7 @@ ParticleSystem:
   simulationSpeed: 1
   looping: 0
   prewarm: 0
-  playOnAwake: 1
+  playOnAwake: 0
   autoRandomSeed: 1
   startDelay:
     serializedVersion: 2

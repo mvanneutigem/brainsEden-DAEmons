@@ -57,7 +57,7 @@ public class Patrol : MonoBehaviour
         _navMeshAgent = GetComponent<NavMeshAgent>();
         if (!_navMeshAgent)
         {
-            Debug.LogError("Enemy doesn't have Nav Mesh Agent component!");
+            Debug.LogWarning("Enemy doesn't have Nav Mesh Agent component!");
         }
     }
 
@@ -90,6 +90,8 @@ public class Patrol : MonoBehaviour
 
     void Update()
     {
+        if (!_navMeshAgent) return;
+
         if (GameManager.IsPlayerSneezing || GameManager.Paused)
         {
             _navMeshAgent.isStopped = true;

@@ -26,7 +26,6 @@ AudioMixerController:
     - 1e3e966439a72c74fa980a1c8e15fd0f
     - bcb0f56f0e2468c4687809d7c5cc8f4e
     - 34f57153bf750994eb18295a12c2e94f
-    - 829293368f0dd7241b4dc0b8b5b20688
     - 3ecf4c3aa7790b944a2425b66e110d2c
     - 0a3b5bddbb9b1a44c90628f37524e193
     - 5c036b5eeefd67e48b3b6be23c67746c
@@ -158,7 +157,6 @@ AudioMixerGroupController:
   m_AudioMixer: {fileID: 24100000}
   m_GroupID: bcb0f56f0e2468c4687809d7c5cc8f4e
   m_Children:
-  - {fileID: 243666730517700530}
   - {fileID: 243015428360344880}
   - {fileID: 243786166515148070}
   - {fileID: 243973341809570202}
@@ -183,23 +181,6 @@ AudioMixerGroupController:
   m_Pitch: da437df2567be9b4da39376a52cbfe57
   m_Effects:
   - {fileID: 244378949516789968}
-  m_UserColorIndex: 0
-  m_Mute: 0
-  m_Solo: 0
-  m_BypassEffects: 0
---- !u!243 &243666730517700530
-AudioMixerGroupController:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_Name: Head Explosion
-  m_AudioMixer: {fileID: 24100000}
-  m_GroupID: 829293368f0dd7241b4dc0b8b5b20688
-  m_Children: []
-  m_Volume: ecdb017b7b9bb8f42a2d8cf05a8399b4
-  m_Pitch: adb1a60712ac43c4baf718676a2b3dd5
-  m_Effects:
-  - {fileID: 244599468376675222}
   m_UserColorIndex: 0
   m_Mute: 0
   m_Solo: 0
@@ -325,19 +306,6 @@ AudioMixerEffectController:
   m_EffectID: a9a026d9ac0f79c4e85c32be5144e867
   m_EffectName: Attenuation
   m_MixLevel: e6f3e460fbb2adc42a52b3eaec91c282
-  m_Parameters: []
-  m_SendTarget: {fileID: 0}
-  m_EnableWetMix: 0
-  m_Bypass: 0
---- !u!244 &244599468376675222
-AudioMixerEffectController:
-  m_ObjectHideFlags: 3
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_Name: 
-  m_EffectID: 543d5a093b8be91408ea1115ab67241e
-  m_EffectName: Attenuation
-  m_MixLevel: 72348b1a9b3f99d4faa499ac4729c9ee
   m_Parameters: []
   m_SendTarget: {fileID: 0}
   m_EnableWetMix: 0

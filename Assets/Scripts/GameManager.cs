@@ -138,7 +138,11 @@ public class GameManager : MonoBehaviour
             {
                 _endScreen.SetActive(true);
                 if(_score > 0)
+                {
+                    _endScreen.transform.GetChild(0).gameObject.SetActive(true);
+                    _endScreen.transform.GetChild(1).gameObject.SetActive(false);   
                     _fillImage = _endScreen.transform.GetChild(0).transform.GetChild(1).transform.GetChild(0).gameObject;
+                }
                 else
                 {
                     _endScreen.transform.GetChild(0).gameObject.SetActive(false);
@@ -185,7 +189,7 @@ public class GameManager : MonoBehaviour
                     if (doneSneezing)
                     {
                         _score = CalculateColourPercentage();
-                        //Debug.Log("Percentage colored: " + );
+                        Debug.Log("Percentage colored: " + _score);
                         //print("everybody sneezed");
                     }
                     else

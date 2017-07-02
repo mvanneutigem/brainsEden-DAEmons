@@ -8,22 +8,22 @@ public class AudioManager : MonoBehaviour
 
     public enum Sound
     {
-        HeadExplosion,
-        MenuInteraction
+        MenuInteraction,
+        Sneeze
     }
 
     public AudioClip MenuBackgroundMusicClip;
+    public AudioClip GameBackgroundChatterClip;
     public AudioClip GameBackgroundMusicClip;
-    private AudioSource _backgroundMusicSource;
+    private AudioSource _backgroundChatterSource;
+    private AudioSource _backgroundGameMusicSource;
+    private AudioSource _backgroundMenuMusicSource;
 
     public AudioClip MenuInteraction;
     private AudioSource _menuInteractionSource;
 
-    public AudioClip HeadExplosion;
-    private AudioSource _headExplosionSource;
-
-    private bool _musicMuted = false;
-    private float _lastMusicVolumeLinear;
+    public AudioClip[] SneezeClips;
+    private AudioSource _sneezeSource;
 
     public float MasterVolume
     {
@@ -97,97 +97,80 @@ public class AudioManager : MonoBehaviour
         return dB;
     }
 
-    private void OnEnable()
+    public void OnSceneLoaded(int sceneBuildIndex)
     {
-        SceneManager.sceneLoaded += OnSceneLoaded;
-    }
-
-    private void OnDisable()
-    {
-        SceneManager.sceneLoaded -= OnSceneLoaded;
-    }
-
-    public void OnSceneLoaded(Scene scene, LoadSceneMode mode)
-    {
-        if (_backgroundMusicSource)
+        switch (sceneBuildIndex)
         {
-            switch (scene.buildIndex)
-            {
-                case (int)GameManager.GameScene.Game:
-                    _backgroundMusicSource.clip = GameBackgroundMusicClip;
-                    _backgroundMusicSource.Play();
-                    break;
-                case (int)GameManager.GameScene.MainMenu:
-                    _backgroundMusicSource.clip = MenuBackgroundMusicClip;
-                    _backgroundMusicSource.Play();
-                    break;
-                default:
-                    break;
-            }
+            case 0: // Main menu scene
+                if (_backgroundMenuMusicSource)
+                {
+                    _backgroundMenuMusicSource.Play();
+                    _backgroundChatterSource.Stop();
+                    Debug.Log("Menu music");
+                }
+                break;
+            default: // Game scenes
+                if (_backgroundGameMusicSource)
+                {
+                    _backgroundGameMusicSource.Play();
+                    _backgroundChatterSource.Play();
+                    Debug.Log("Game music");
+                }
+                break;
         }
     }
 
     private void Start()
     {
-        CreateAndInitializeSource(ref _backgroundMusicSource, null);
-        SetSourceMixerGroupMixerGroup("Master/Music", _backgroundMusicSource);
-        _backgroundMusicSource.loop = true;
-
-        if (GameManager.CurrentGameScene == GameManager.GameScene.MainMenu)
+        if (SneezeClips.Length == 0)
         {
-            _backgroundMusicSource.clip = MenuBackgroundMusicClip;
+            Debug.LogError("There are no sneeze clips in the audio manager! We need at least one");
+        }
+
+        CreateAndInitializeSource(ref _backgroundGameMusicSource, GameBackgroundMusicClip);
+        SetSourceMixerGroupMixerGroup("Master/Music/Game Music", _backgroundGameMusicSource);
+        _backgroundGameMusicSource.loop = true;
+
+        CreateAndInitializeSource(ref _backgroundMenuMusicSource, MenuBackgroundMusicClip);
+        SetSourceMixerGroupMixerGroup("Master/Music/Menu Music", _backgroundMenuMusicSource);
+        _backgroundMenuMusicSource.loop = true;
+
+        CreateAndInitializeSource(ref _backgroundChatterSource, GameBackgroundChatterClip);
+        SetSourceMixerGroupMixerGroup("Master/Music/Background Chatter", _backgroundChatterSource);
+        _backgroundChatterSource.loop = true;
+
+        if (GameManager.CurrentGameSceneIndex == 0) // Main menu
+        {
+            _backgroundMenuMusicSource.Play();
+
+            _backgroundGameMusicSource.Stop();
+            _backgroundChatterSource.Stop();
         }
         else
         {
-          _backgroundMusicSource.clip = GameBackgroundMusicClip;
+            _backgroundGameMusicSource.Play();
+            _backgroundChatterSource.Play();
+
+            _backgroundMenuMusicSource.Stop();
         }
 
         CreateAndInitializeSource(ref _menuInteractionSource, MenuInteraction);
         SetSourceMixerGroupMixerGroup("Master/SFX/Menu Interaction", _menuInteractionSource);
 
-        CreateAndInitializeSource(ref _headExplosionSource, HeadExplosion);
-        SetSourceMixerGroupMixerGroup("Master/SFX/Head Explosion", _headExplosionSource);
-
-        _backgroundMusicSource.Play();
-    }
-
-    private void Update()
-    {
-        if (Input.GetKeyUp(KeyCode.M))
+        for (int i = 0; i < SneezeClips.Length; i++)
         {
-            ToggleMuted();
+            CreateAndInitializeSource(ref _sneezeSource, SneezeClips[i]);
         }
-    }
-
-    private void OnGUI()
-    {
-        if (Debug.isDebugBuild && _musicMuted)
-        {
-            GUIStyle style = new GUIStyle();
-            style.fontSize = 24;
-            GUI.color = Color.black;
-            GUI.Label(new Rect(10, 10, 100, 100), "M", style);
-        }
-    }
-
-    private void ToggleMuted()
-    {
-        _musicMuted = !_musicMuted;
-
-        if (_musicMuted)
-        {
-            _lastMusicVolumeLinear = GetMusicVolumeLinear();
-            SetMusicVolumeLinear(0.0f);
-        }
-        else
-        {
-            SetMusicVolumeLinear(_lastMusicVolumeLinear);
-        }
+        SetSourceMixerGroupMixerGroup("Master/SFX/Sneeze", _sneezeSource);
     }
 
     private void CreateAndInitializeSource(ref AudioSource source, AudioClip clip)
     {
-        source = gameObject.AddComponent<AudioSource>();
+        if (!source)
+        {
+            source = gameObject.AddComponent<AudioSource>();
+        }
+
         source.clip = clip;
         source.loop = false;
         source.playOnAwake = false;
@@ -219,8 +202,13 @@ public class AudioManager : MonoBehaviour
             case Sound.MenuInteraction:
                 if (restart || !_menuInteractionSource.isPlaying) _menuInteractionSource.Play();
                 break;
-            case Sound.HeadExplosion:
-                if (restart || !_headExplosionSource.isPlaying) _headExplosionSource.Play();
+            case Sound.Sneeze:
+                if (restart || !_sneezeSource.isPlaying)
+                {
+                    int sneezeIndex = Random.Range(0, SneezeClips.Length);
+                    _sneezeSource.clip = SneezeClips[sneezeIndex];
+                    _sneezeSource.Play();
+                }
                 break;
             default:
                 break;
@@ -234,8 +222,8 @@ public class AudioManager : MonoBehaviour
             case Sound.MenuInteraction:
                 _menuInteractionSource.Stop();
                 break;
-            case Sound.HeadExplosion:
-                _headExplosionSource.Stop();
+            case Sound.Sneeze:
+                _sneezeSource.Stop();
                 break;
             default:
                 break;

@@ -30,6 +30,7 @@ public class Patrol : MonoBehaviour
     private Vector3 _target;
     private Vector3 _direction;
     private bool _touched = false;
+    private Material enemyMat;
 
     private float _cutCornerFactor = 0;
     public float MaxCutCornerFactor = 5;
@@ -56,6 +57,8 @@ public class Patrol : MonoBehaviour
         }
 
         _navMeshAgent = GetComponent<NavMeshAgent>();
+        enemyMat = transform.GetChild(0).GetComponent<Renderer>().material;
+        enemyMat.color = new Color(0.35f, 0.35f, 0.35f);
     }
 
     private void OnEnable()
@@ -79,6 +82,7 @@ public class Patrol : MonoBehaviour
     void OnParticleCollision(GameObject other)
     {
         //Debug.Log("ChainSneeze activated");
+        enemyMat.color = Color.green;
         Sneeze();
         _touched = true;
         gameObject.GetComponent<ActorRotation>().SetTouched();

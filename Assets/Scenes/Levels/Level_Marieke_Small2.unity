@@ -2738,6 +2738,12 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 53fefc53a98d8534e805246d5e73f863, type: 2}
   m_IsPrefabParent: 0
+--- !u!114 &1386270769 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114256011079261540, guid: 53fefc53a98d8534e805246d5e73f863,
+    type: 2}
+  m_PrefabInternal: {fileID: 1320747050}
+  m_Script: {fileID: 11500000, guid: 3fb76c2bb5a445a4bbf49344567f6f0a, type: 3}
 --- !u!1001 &1419914214
 Prefab:
   m_ObjectHideFlags: 0
@@ -3032,17 +3038,42 @@ Prefab:
     - target: {fileID: 224393129594202910, guid: c549a536b1d429543a918d93fbcad050,
         type: 2}
       propertyPath: m_AnchorMax.x
-      value: 1
+      value: 0.25
       objectReference: {fileID: 0}
     - target: {fileID: 224135474575900666, guid: c549a536b1d429543a918d93fbcad050,
         type: 2}
       propertyPath: m_AnchorMin.x
-      value: 1
+      value: 0.25
       objectReference: {fileID: 0}
     - target: {fileID: 224135474575900666, guid: c549a536b1d429543a918d93fbcad050,
         type: 2}
       propertyPath: m_AnchorMax.x
-      value: 1
+      value: 0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 114195767774823036, guid: c549a536b1d429543a918d93fbcad050,
+        type: 2}
+      propertyPath: m_Value
+      value: 0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 114195767774823036, guid: c549a536b1d429543a918d93fbcad050,
+        type: 2}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1386270769}
+    - target: {fileID: 114195767774823036, guid: c549a536b1d429543a918d93fbcad050,
+        type: 2}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: set_SFXVolume
+      objectReference: {fileID: 0}
+    - target: {fileID: 114609810499702028, guid: c549a536b1d429543a918d93fbcad050,
+        type: 2}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1386270769}
+    - target: {fileID: 114609810499702028, guid: c549a536b1d429543a918d93fbcad050,
+        type: 2}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: SetMusicVolumeLinear
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c549a536b1d429543a918d93fbcad050, type: 2}

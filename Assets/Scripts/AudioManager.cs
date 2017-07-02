@@ -172,6 +172,8 @@ public class AudioManager : MonoBehaviour
             CreateAndInitializeSource(ref _sneezeSources[i], null);
             SetSourceMixerGroupMixerGroup("Master/SFX/Sneeze", _sneezeSources[i]);
         }
+
+        SFXVolume = 0.25f;
     }
 
     private void CreateAndInitializeSource(ref AudioSource source, AudioClip clip)

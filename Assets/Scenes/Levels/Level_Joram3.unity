@@ -2393,11 +2393,29 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4721554803507682, guid: 53fefc53a98d8534e805246d5e73f863, type: 2}
       propertyPath: m_RootOrder
-      value: 14
+      value: 13
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 53fefc53a98d8534e805246d5e73f863, type: 2}
   m_IsPrefabParent: 0
+--- !u!114 &1320747051 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114985601421046258, guid: 53fefc53a98d8534e805246d5e73f863,
+    type: 2}
+  m_PrefabInternal: {fileID: 1320747050}
+  m_Script: {fileID: 11500000, guid: 1ceba9d8a8416794fbeb9460cf625731, type: 3}
+--- !u!114 &1320747052 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114256011079261540, guid: 53fefc53a98d8534e805246d5e73f863,
+    type: 2}
+  m_PrefabInternal: {fileID: 1320747050}
+  m_Script: {fileID: 11500000, guid: 3fb76c2bb5a445a4bbf49344567f6f0a, type: 3}
+--- !u!114 &1320747053 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114541425715746780, guid: 53fefc53a98d8534e805246d5e73f863,
+    type: 2}
+  m_PrefabInternal: {fileID: 1320747050}
+  m_Script: {fileID: 11500000, guid: 1cd506a3f8291844a971a1c57f85d5fc, type: 3}
 --- !u!1001 &1429551875
 Prefab:
   m_ObjectHideFlags: 0
@@ -2547,7 +2565,7 @@ Prefab:
     - target: {fileID: 224966303628029226, guid: c549a536b1d429543a918d93fbcad050,
         type: 2}
       propertyPath: m_RootOrder
-      value: 13
+      value: 14
       objectReference: {fileID: 0}
     - target: {fileID: 224966303628029226, guid: c549a536b1d429543a918d93fbcad050,
         type: 2}
@@ -2648,6 +2666,66 @@ Prefab:
         type: 2}
       propertyPath: m_AnchorMax.x
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114568816117804904, guid: c549a536b1d429543a918d93fbcad050,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1320747053}
+    - target: {fileID: 114568816117804904, guid: c549a536b1d429543a918d93fbcad050,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: SetPaused
+      objectReference: {fileID: 0}
+    - target: {fileID: 114587008999113380, guid: c549a536b1d429543a918d93fbcad050,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1320747051}
+    - target: {fileID: 114587008999113380, guid: c549a536b1d429543a918d93fbcad050,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ReloadLevel
+      objectReference: {fileID: 0}
+    - target: {fileID: 114617499668934208, guid: c549a536b1d429543a918d93fbcad050,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1320747051}
+    - target: {fileID: 114617499668934208, guid: c549a536b1d429543a918d93fbcad050,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: LoadMainMenu
+      objectReference: {fileID: 0}
+    - target: {fileID: 114941557986783552, guid: c549a536b1d429543a918d93fbcad050,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1320747051}
+    - target: {fileID: 114941557986783552, guid: c549a536b1d429543a918d93fbcad050,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: QuitGame
+      objectReference: {fileID: 0}
+    - target: {fileID: 114609810499702028, guid: c549a536b1d429543a918d93fbcad050,
+        type: 2}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1320747052}
+    - target: {fileID: 114609810499702028, guid: c549a536b1d429543a918d93fbcad050,
+        type: 2}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: SetMusicVolumeLinear
+      objectReference: {fileID: 0}
+    - target: {fileID: 114195767774823036, guid: c549a536b1d429543a918d93fbcad050,
+        type: 2}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1320747052}
+    - target: {fileID: 114195767774823036, guid: c549a536b1d429543a918d93fbcad050,
+        type: 2}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: set_SFXVolume
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c549a536b1d429543a918d93fbcad050, type: 2}

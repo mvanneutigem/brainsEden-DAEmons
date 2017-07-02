@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
+using System.Collections;
 
 public class GameManager : MonoBehaviour
 {
@@ -12,6 +13,7 @@ public class GameManager : MonoBehaviour
     private static Canvas _pauseMenuCanvas;
 
     private static GameObject _resumeButton;
+    private static GameObject _retryButton;
 
     public static bool IsPlayerSneezing = false;
     private bool _finishedLevel = false;
@@ -112,6 +114,7 @@ public class GameManager : MonoBehaviour
         }
 
         _resumeButton = GameObject.Find("ResumeButton").gameObject;
+        _retryButton = GameObject.Find("RetryButton").gameObject;
 
         _endScreen = GameObject.Find("EndScreen");
         _endScreen.SetActive(false);
@@ -188,6 +191,9 @@ public class GameManager : MonoBehaviour
                         //print("not everybody sneezed");
                     }
                     _finishedLevel = true;
+
+                    FindObjectOfType<EventSystem>().SetSelectedGameObject(_retryButton);
+                    _retryButton.GetComponent<UnityEngine.UI.Button>().Select();
                 }
             }
         }

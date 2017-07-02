@@ -259,6 +259,7 @@ MonoBehaviour:
   CornerIncrementSpeed: 0.1
   _DetectionRadius: 7.5
   _LookAtPlayerRotationSpeedMultiplier: 0
+  GreenMaterial: {fileID: 2100000, guid: a54c78e640ad70b46aebd450326b8788, type: 2}
 --- !u!114 &114909635522460344
 MonoBehaviour:
   m_ObjectHideFlags: 1

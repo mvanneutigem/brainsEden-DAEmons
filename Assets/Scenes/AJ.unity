@@ -177,7 +177,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4790708581839588, guid: fbfe64cc047714147810d5f110a09c0b, type: 2}
       propertyPath: m_RootOrder
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: fbfe64cc047714147810d5f110a09c0b, type: 2}
@@ -337,7 +337,7 @@ Prefab:
     - target: {fileID: 224450248473986116, guid: 4421ba0902301dc4e9b85af07df2bae4,
         type: 2}
       propertyPath: m_RootOrder
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 224450248473986116, guid: 4421ba0902301dc4e9b85af07df2bae4,
         type: 2}
@@ -701,7 +701,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
 --- !u!1 &515235350
 GameObject:
@@ -744,7 +744,7 @@ Transform:
   - {fileID: 1655298091}
   - {fileID: 759386087}
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &552552626 stripped
 MonoBehaviour:
@@ -1004,7 +1004,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4217561226200678, guid: 64d3ce32511cce94eb7c0962ec89a8bf, type: 2}
       propertyPath: m_RootOrder
-      value: 8
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 114282972569911922, guid: 64d3ce32511cce94eb7c0962ec89a8bf,
         type: 2}
@@ -1350,7 +1350,7 @@ Transform:
   - {fileID: 733473899}
   - {fileID: 5388275}
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &924058844
 Prefab:
@@ -1389,7 +1389,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4885565686732004, guid: 2fef0d82c4fb2c84dadee76bdd8a5be2, type: 2}
       propertyPath: m_RootOrder
-      value: 5
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 2fef0d82c4fb2c84dadee76bdd8a5be2, type: 2}
@@ -2081,7 +2081,7 @@ Prefab:
     - target: {fileID: 224966303628029226, guid: c549a536b1d429543a918d93fbcad050,
         type: 2}
       propertyPath: m_RootOrder
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 224966303628029226, guid: c549a536b1d429543a918d93fbcad050,
         type: 2}

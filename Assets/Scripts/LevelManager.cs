@@ -13,14 +13,15 @@ public class LevelManager : MonoBehaviour
         LoadScene(0);
     }
 
-    public void LoadLevelSelection()
-    {
-        LoadScene(1);
-    }
-
     public void LoadScene(int sceneIndex)
     {
         SceneManager.LoadScene(sceneIndex);
+    }
+
+    public void ReloadLevel()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        GameManager.Paused = false;
     }
 
     public void LoadLevel(int levelIndex)

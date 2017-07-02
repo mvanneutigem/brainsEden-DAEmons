@@ -11,6 +11,40 @@ public class MainMenuSpriteSwapper : MonoBehaviour
 
     private int _currentlySelectedLevelIndex = 1;
 
+    // Use this for initialization
+    public GameObject back;
+
+    public Sprite one;
+    public Sprite two;
+    public Sprite three;
+    public Sprite four;
+    public Sprite five;
+
+    // Update is called once per frame
+    void Update()
+    {
+        switch (_currentlySelectedLevelIndex)
+        {
+            case 1:
+                back.GetComponent<Image>().sprite = one;
+                break;
+            case 2:
+                back.GetComponent<Image>().sprite = two;
+                break;
+            case 3:
+                back.GetComponent<Image>().sprite = three;
+                break;
+            case 4:
+                back.GetComponent<Image>().sprite = four;
+                break;
+            case 5:
+                back.GetComponent<Image>().sprite = five;
+                break;
+
+        }
+
+    }
+
     public void LoadSelectedLevel()
     {
         FindObjectOfType<LevelManager>().LoadLevel(_currentlySelectedLevelIndex);
@@ -31,6 +65,7 @@ public class MainMenuSpriteSwapper : MonoBehaviour
     public void OnLevelHoverEnter(int levelIndex)
     {
         GameManager.AudioManager.PlaySound(AudioManager.Sound.MenuInteraction);
+        _currentlySelectedLevelIndex = levelIndex;
     }
 
     public void OnStartHoverEnter()

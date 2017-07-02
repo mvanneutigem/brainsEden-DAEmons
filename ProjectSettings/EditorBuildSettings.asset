@@ -17,3 +17,6 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Levels/Level_Stijn.unity
     guid: cf622bcb1d4af1b48acf943a59bd2556
+  - enabled: 1
+    path: Assets/Scenes/Levels/Level_Marieke.unity
+    guid: 9b05332a25fca30409734bcf9a44d69d

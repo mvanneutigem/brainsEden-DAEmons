@@ -292,7 +292,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Angle: 45
   _RotationSpeed: 0.25
-  ShouldRotate: 1
+  ShouldRotate: 0
 --- !u!114 &114713381339948376
 MonoBehaviour:
   m_ObjectHideFlags: 1

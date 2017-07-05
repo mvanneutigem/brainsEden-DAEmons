@@ -1,11 +1,17 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using XInputDotNetPure; // Required in C#
+
+#if UNITY_STANDALONE
+    using XInputDotNetPure; // Required in C#
+#endif
 
 public class VibrationManager : MonoBehaviour
 {
-    PlayerIndex playerIndex = PlayerIndex.One;
+    #if UNITY_STANDALONE
+        PlayerIndex playerIndex = PlayerIndex.One;
+    #endif
+
     private float timer = 1;
     private float vibrationDuration = 0.3f;
 
@@ -15,24 +21,29 @@ public class VibrationManager : MonoBehaviour
 
     void OnDestroy()
     {
-        GamePad.SetVibration(playerIndex, 0, 0);
+        #if UNITY_STANDALONE
+            GamePad.SetVibration(playerIndex, 0, 0);
+        #endif
     }
     // Update is called once per frame
     void Update () {
-        timer += Time.deltaTime;
-        if (timer > vibrationDuration)
-        {
-            GamePad.SetVibration(playerIndex, 0, 0);
-        }
-        else
-        {
-            GamePad.SetVibration(playerIndex, 1, 1);
-        }
-
+        #if UNITY_STANDALONE
+            timer += Time.deltaTime;
+            if (timer > vibrationDuration)
+            {
+                GamePad.SetVibration(playerIndex, 0, 0);
+            }
+            else
+            {
+                GamePad.SetVibration(playerIndex, 1, 1);
+            }
+        #endif
     }
     public void vibrate()
     {
-        //GamePad.SetVibration(playerIndex, 1, 1);
-        timer = 0;
+        #if UNITY_STANDALONE
+            //GamePad.SetVibration(playerIndex, 1, 1);
+            timer = 0;
+        #endif
     }
 }

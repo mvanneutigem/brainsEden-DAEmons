@@ -98,7 +98,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1250009548639866
 GameObject:
   m_ObjectHideFlags: 1
@@ -334,7 +334,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Press SELECT or ESC to continieu
+  m_Text: Press SELECT or ESC to continue
 --- !u!114 &114099251950650268
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -518,7 +518,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Press SELECT or ESC to continieu
+  m_Text: Press SELECT or ESC to continue
 --- !u!114 &114404889806981630
 MonoBehaviour:
   m_ObjectHideFlags: 1
